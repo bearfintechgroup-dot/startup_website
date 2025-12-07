@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BEAR FINTECH GROUP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div id="particles-js"></div>
+<!-- Navigation Menu -->
+<nav>
+    <a href="/">Home</a> |
+    <a href="/about">About</a> |
+    <a href="/services">Services</a> |
+    <a href="/contact">Contact</a>
+</nav>
+
+<hr>
+
+<!-- Page content goes here -->
+{% block content %}{% endblock %}
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script src="{{ url_for('static', filename='js/particles-config.js') }}"></script>
+</body>
+</html>

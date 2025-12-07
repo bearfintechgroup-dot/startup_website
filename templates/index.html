@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero">
+    <div class="hero-content">
+        <h1>
+            BEAR FINTECH<br>
+            IMMERSIVE AND INNOVATIVE<br>
+            DIGITAL PLATFORM
+        </h1>
+
+        <p>
+            We are building modern solutions that connect technology,
+            creativity, demonstrating real-world impact.
+        </p>
+
+        <a href="/contact" class="hero-button">
+            Get Started
+        </a>
+    </div>
+</div>
+
+<!-- ABOUT SECTION -->
+<section id="about" class="section">
+    <div class="container">
+        <h2>About Us</h2>
+        <p>
+            Our startup creates innovative solutions that bridge technology, creativity,
+            and real-world impact. We focus on delivering positive experiences and building
+            a better future
+        </p>
+    </div>
+</section>
+
+<!-- SERVICES / FEATURES SECTION -->
+<section id="services" class="section">
+    <div class="container">
+        <h2>Our Services</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <img src="{{ url_for('static', filename='images/icon1.png') }}" alt="Service 1" class="feature-icon">
+                <h3>Service 1</h3>
+                <p>Brief description of service 1.</p>
+            </div>
+            <div class="feature-card">
+                 <img src="{{ url_for('static', filename='images/icon2.png') }}" alt="Service 2" class="feature-icon">
+                <h3>Service 2</h3>
+                <p>Brief description of service 2.</p>
+            </div>
+            <div class="feature-card">
+                <img src="{{ url_for('static', filename='images/icon3.png') }}" alt="Service 3" class="feature-icon">
+                <h3>Service 3</h3>
+                <p>Brief description of service 3.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CALL TO ACTION -->
+<section id="cta" class="section">
+    <div class="container">
+        <h2>Ready to get started?</h2>
+        <a href="/contact" class="hero-button">Contact Us</a>
+    </div>
+</section>
+{% endblock %}
+
