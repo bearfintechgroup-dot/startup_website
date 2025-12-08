@@ -4,6 +4,7 @@ import traceback
 import datetime
 from flask import current_app
 import os
+from threading import Thread
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -44,47 +45,32 @@ def services():
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
-        # Get form safely (use .get to avoid KeyError if field missing)
-        name = request.form.get("name", "").strip()
-        email = request.form.get("email", "").strip()
-        message_body = request.form.get("message", "").strip()
+        name = request.form["name"]
+        email = request.form["email"]
+        message_body = request.form["message"]
 
-        # Basic validation: require name/email/message
-        if not name or not email or not message_body:
-            flash("Please complete all fields before sending.", "danger")
-            return redirect("/contact")
-
-        # Save the message locally as a fallback (append)
-        try:
-            ts = datetime.datetime.utcnow().isoformat()
-            with open("sent_messages.log", "a", encoding="utf-8") as f:
-                f.write(f"[{ts}] Name: {name} | Email: {email}\n{message_body}\n\n")
-        except Exception as file_err:
-            # Log but don't block sending
-            app.logger.error("Failed to write fallback message: %s", file_err)
-
-        # Prepare the email
         msg = Message(
             subject=f"New Contact Form Submission from {name}",
-            sender=app.config.get('MAIL_USERNAME'),
-            recipients=[app.config.get('MAIL_USERNAME')],  # send to yourself
+            sender=app.config['MAIL_USERNAME'],
+            recipients=[app.config['MAIL_USERNAME']],
             body=f"Name: {name}\nEmail: {email}\n\nMessage:\n{message_body}"
         )
 
-        # Try sending the email & log full traceback if it fails
         try:
-            mail.send(msg)
+            # send email in a background thread
+            Thread(target=send_async_email, args=(app, msg)).start()
             flash("Message sent successfully!", "success")
         except Exception as e:
-            # Log full traceback to PyCharm console (very useful)
-            app.logger.error("Exception while sending email:\n%s", traceback.format_exc())
-            # Show a user-friendly message
-            flash("There was a problem sending your message; it has been saved and I will be notified.", "danger")
+            flash(f"An error occurred: {str(e)}", "danger")
 
         return redirect("/contact")
 
     return render_template("contact.html")
 
+
+def send_async_email(app, msg):
+    with app.app_context():
+        mail.send(msg)
 
 if __name__ == "__main__":
     app.run(debug=True)
