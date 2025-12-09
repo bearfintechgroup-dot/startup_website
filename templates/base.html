@@ -10,7 +10,10 @@
 
 <body>
 
-<div id="particles-js"></div>
+<div id="particles-wrapper">
+    <div id="particles-js"></div>
+</div>
+
 <div class="hero-overlay"></div>
 
 <!-- Navigation Menu -->
@@ -61,6 +64,20 @@ window.addEventListener("scroll", () => {
         navbar.classList.add("scrolled");
     } else {
         navbar.classList.remove("scrolled");
+    }
+});
+</script>
+<script>
+document.addEventListener("scroll", () => {
+    const heroHeight = document.querySelector(".hero-image").offsetHeight;
+    const particles = document.getElementById("particles-wrapper");
+
+    if (window.scrollY < heroHeight - 50) {
+        // Still inside hero → hide particles
+        particles.classList.add("hidden");
+    } else {
+        // Past hero → show particles
+        particles.classList.remove("hidden");
     }
 });
 </script>
