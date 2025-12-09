@@ -32,11 +32,12 @@ nav a:hover {
 
 /* HERO SECTION */
 .hero {
-    height: 80vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 
 /* HERO CONTENT */
 .hero-content {
@@ -72,6 +73,16 @@ nav a:hover {
     text-decoration: none;
     font-weight: bold;
 }
+.hero-image {
+    background-image: url('../images/home-hero.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
 
 /* NORMAL CONTENT (OTHER PAGES) */
 .container {
@@ -88,7 +99,11 @@ nav a:hover {
     height: 100%;
     z-index: -1;
 }
-
+#particles-wrapper.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s ease;
+}
 .section {
     padding: 80px 20px;
 }
