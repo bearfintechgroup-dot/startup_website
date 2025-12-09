@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="hero">
+
+<!-- HERO SECTION -->
+<div class="hero fade-in">
     <div class="hero-content">
         <h1>
-            BEAR FINTECH<br>
-            Where Performance Meets Technology<br>
+            A SHARED, IMMERSIVE,<br>
+            AND INNOVATIVE<br>
+            DIGITAL PLATFORM
         </h1>
 
         <p>
-            Building high-impact financial and digital solutions powered by discipline, innovation,
-            and real-world execution. We design modern platforms at the intersection of finance, software,
-            and technology—turning ideas into scalable tools that perform under pressure.
-
-            Inspired by elite performance. Engineered for real results.
+            We are building modern solutions that connect technology,
+            creativity, and real-world impact.
         </p>
 
         <a href="/contact" class="hero-button">
@@ -22,97 +22,84 @@
     </div>
 </div>
 
+
 <!-- ABOUT SECTION -->
-<section class="about-section">
+<section class="about-section fade-in delay-1">
     <h2>Innovating Finance & Technology</h2>
     <p>
-        BEAR FINTECH GROUP is building modern digital solutions that combine financial intelligence,
-        powerful software, and futuristic user experiences. We exist to push boundaries and create
-        tools that matter.
+        BEAR FINTECH GROUP builds modern digital solutions that combine financial intelligence,
+        powerful technology, and real-world impact. Our mission is to push boundaries and design
+        tools that create meaningful experiences.
     </p>
 </section>
 
+
 <!-- SERVICES SECTION -->
-<section class="services-section">
+<section class="services-section fade-in delay-2">
     <h2>Our Core Services</h2>
 
     <div class="services-grid">
+
         <!-- SERVICE 1 -->
-        <div class="service-card">
-            <img src="{{ url_for('static', filename='images/fintech.svg') }}" class="service-icon">
+        <div class="service-card fade-in delay-1">
+            <img src="{{ url_for('static', filename='images/fintech.svg') }}" class="service-icon" alt="Financial Services">
             <h3>Financial Services</h3>
-            <p>Smart investment insights, market tools, and digital financial solutions designed for growth.</p>
+            <p>
+                Investment tools, data-driven insights, and adaptive financial systems designed for growth.
+            </p>
         </div>
 
         <!-- SERVICE 2 -->
-        <div class="service-card">
-            <img src="{{ url_for('static', filename='images/tech.svg') }}" class="service-icon">
+        <div class="service-card fade-in delay-2">
+            <img src="{{ url_for('static', filename='images/tech.svg') }}" class="service-icon" alt="Technology Development">
             <h3>Technology Development</h3>
-            <p>Modern web experiences, software development, and technology-driven products that scale.</p>
+            <p>
+                Modern web experiences, software development, and scalable solutions for real-world use.
+            </p>
         </div>
 
         <!-- SERVICE 3 -->
-        <div class="service-card">
-            <img src="{{ url_for('static', filename='images/innovation.svg') }}" class="service-icon">
+        <div class="service-card fade-in delay-3">
+            <img src="{{ url_for('static', filename='images/innovation.svg') }}" class="service-icon" alt="Innovation Lab">
             <h3>Innovation Lab</h3>
-            <p>Exploring new ideas, automation tools, and experimental digital systems for the future.</p>
+            <p>
+                An experimental environment for testing new ideas, automation, and futuristic digital systems.
+            </p>
         </div>
+
     </div>
 </section>
 
-<!-- WHY CHOOSE US -->
-<section class="why-section">
+
+<!-- WHY CHOOSE US SECTION -->
+<section class="why-section fade-in delay-3">
     <h2>Why Choose Us</h2>
 
     <div class="why-grid">
-        <div class="why-item">
+
+        <div class="why-item fade-in delay-1">
             <h4>Future-Focused</h4>
             <p>We don't follow trends — we build what's next.</p>
         </div>
 
-        <div class="why-item">
+        <div class="why-item fade-in delay-2">
             <h4>Expert Engineering</h4>
-            <p>Clean, modern, scalable technology at the core.</p>
+            <p>Clean, scalable, reliable technology at the core of everything we build.</p>
         </div>
 
-        <div class="why-item">
+        <div class="why-item fade-in delay-3">
             <h4>Human-Centered</h4>
             <p>Design that connects people and technology seamlessly.</p>
         </div>
+
     </div>
 </section>
 
-
-<!-- SERVICES / FEATURES SECTION -->
-<section id="services" class="section">
-    <div class="container">
-        <h2>Our Services</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <img src="{{ url_for('static', filename='images/icon1.png') }}" alt="Service 1" class="feature-icon">
-                <h3>Service 1</h3>
-                <p>Brief description of service 1.</p>
-            </div>
-            <div class="feature-card">
-                 <img src="{{ url_for('static', filename='images/icon2.png') }}" alt="Service 2" class="feature-icon">
-                <h3>Service 2</h3>
-                <p>Brief description of service 2.</p>
-            </div>
-            <div class="feature-card">
-                <img src="{{ url_for('static', filename='images/icon3.png') }}" alt="Service 3" class="feature-icon">
-                <h3>Service 3</h3>
-                <p>Brief description of service 3.</p>
-            </div>
-        </div>
-    </div>
+<!-- CTA SECTION -->
+<section class="cta-section fade-in delay-3">
+    <h2>Ready to Build the Future?</h2>
+    <p>Let’s start turning your ideas into powerful digital solutions.</p>
+    <a href="/contact" class="cta-button">Get Started</a>
 </section>
 
-<!-- CALL TO ACTION -->
-<section id="cta" class="section">
-    <div class="container">
-        <h2>Ready to get started?</h2>
-        <a href="/contact" class="hero-button">Contact Us</a>
-    </div>
-</section>
 {% endblock %}
-

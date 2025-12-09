@@ -336,3 +336,89 @@ nav a:hover {
     transform: scale(1.2);
     filter: drop-shadow(0 0 10px #7f5cff);
 }
+/* Fade-in animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.fade-in.delay-1 {
+    animation-delay: 0.2s;
+}
+
+.fade-in.delay-2 {
+    animation-delay: 0.4s;
+}
+
+.fade-in.delay-3 {
+    animation-delay: 0.6s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Typography improvements */
+h1, h2, h3, h4 {
+    letter-spacing: 0.5px;
+}
+
+p {
+    line-height: 1.7;
+}
+
+/* Section spacing */
+section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+/* Max width for centered reading */
+section p {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* CTA Section */
+.cta-section {
+    text-align: center;
+    margin-top: 100px;
+    padding: 60px 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.cta-section h2 {
+    font-size: 36px;
+    color: #b388ff;
+}
+
+.cta-section p {
+    color: #ddd;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    font-size: 18px;
+}
+
+.cta-button {
+    padding: 12px 30px;
+    background: linear-gradient(90deg, #7f5cff, #5b9dff);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(127,92,255,0.5);
+}
