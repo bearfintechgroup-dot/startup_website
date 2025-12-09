@@ -285,3 +285,54 @@ nav a:hover {
 .nav-logo:hover {
     filter: drop-shadow(0 0 10px #b388ff);
 }
+/* NAVBAR CLEAN DESIGN */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    position: relative;
+    z-index: 10;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: #b388ff;
+    letter-spacing: 1px;
+}
+
+.nav-links a {
+    margin: 0 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #b388ff;
+    transform: translateY(-2px);
+}
+
+/* Logo size */
+.nav-logo {
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+}
+/* ICON HOVER ANIMATION */
+.service-icon {
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 10px #7f5cff);
+}
