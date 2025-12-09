@@ -285,15 +285,26 @@ nav a:hover {
 .nav-logo:hover {
     filter: drop-shadow(0 0 10px #b388ff);
 }
-/* NAVBAR CLEAN DESIGN */
+/* NAVBAR CLEAN DESIGN + STICKY BEHAVIOR */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 60px;
-    position: relative;
-    z-index: 10;
+    position: sticky;
+    top: 0;
+    background: rgba(0, 0, 0, 0.10); /* transparent at top */
+    backdrop-filter: blur(10px);
+    transition: background 0.3s ease, padding 0.3s ease;
+    z-index: 100;
 }
+
+/* Darker navbar when scrolling */
+.navbar.scrolled {
+    background: rgba(0, 0, 0, 0.55);
+    padding: 12px 40px;
+}
+
 
 .nav-left {
     display: flex;
@@ -666,4 +677,18 @@ section p {
         padding: 10px 24px;
         font-size: 16px;
     }
+}
+html {
+    scroll-behavior: smooth;
+}
+/* Make entire card clickable */
+.service-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+}
+
+.service-card-link:hover .service-card {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(127, 92, 255, 0.25);
 }
