@@ -692,3 +692,23 @@ html {
     transform: translateY(-8px);
     box-shadow: 0 10px 25px rgba(127, 92, 255, 0.25);
 }
+/* IMAGE DIVIDER */
+.image-divider {
+    width: 100%;
+    height: 280px;
+   background-image: url('../images/home-divider.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    border-radius: 12px;
+    margin: 60px auto;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+/* Reveal animation when in view */
+.image-divider.appear {
+    opacity: 1;
+    transform: translateY(0);
+}
