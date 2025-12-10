@@ -1,8 +1,45 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    <h1>Welcome to My Startup</h1>
-    <p>This business helps customers with real problems.</p>
-</div>
+
+<section class="services-section fade-in">
+    <h1>Our Services</h1>
+
+    <p>
+        We provide a growing suite of digital and financial solutions designed to meet the evolving needs
+        of individuals, entrepreneurs, and modern businesses.
+    </p>
+
+    <div class="services-grid fade-in delay-1">
+
+        <div class="service-card">
+            <img src="{{ url_for('static', filename='images/fintech.svg') }}" class="service-icon">
+            <h3>Financial Services</h3>
+            <p>
+                Intelligent financial tools, investment insights, and personalized digital strategies
+                designed to support long-term growth and financial confidence.
+            </p>
+        </div>
+
+        <div class="service-card">
+            <img src="{{ url_for('static', filename='images/tech.svg') }}" class="service-icon">
+            <h3>Technology Development</h3>
+            <p>
+                Full-stack website creation, modern application development, system automation,
+                and custom-built software tailored to your goals.
+            </p>
+        </div>
+
+        <div class="service-card">
+            <img src="{{ url_for('static', filename='images/innovation.svg') }}" class="service-icon">
+            <h3>Innovation Lab</h3>
+            <p>
+                Experimental prototypes, data automation tools, AI-assisted workflows, and next-gen
+                digital experiences built in our creative engineering space.
+            </p>
+        </div>
+
+    </div>
+</section>
+
 {% endblock %}

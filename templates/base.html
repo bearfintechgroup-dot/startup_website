@@ -1,22 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>BEAR FINTECH GROUP</title>
+
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/bear_logo.svg') }}">
-
-
 </head>
 
 <body>
 
+<!-- PARTICLES BACKGROUND -->
 <div id="particles-wrapper">
     <div id="particles-js"></div>
 </div>
 
+<!-- Subtle dark overlay -->
 <div class="hero-overlay"></div>
 
-<!-- Navigation Menu -->
+<!-- NAVIGATION BAR -->
 <nav class="navbar">
     <div class="nav-left">
         <img src="{{ url_for('static', filename='images/bear_logo.svg') }}" class="nav-logo" alt="Bear Logo">
@@ -31,56 +39,81 @@
     </div>
 </nav>
 
-
-
-<hr>
-
-<!-- Page content goes here -->
+<!-- MAIN PAGE CONTENT -->
 {% block content %}{% endblock %}
 
+
+
+<!-- ======================================================
+     PARTICLES.JS
+====================================================== -->
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script src="{{ url_for('static', filename='js/particles-config.js') }}"></script>
+
+
+
+<!-- ======================================================
+     FADE-IN ANIMATION (IntersectionObserver)
+====================================================== -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    const fadeElements = document.querySelectorAll('.fade-in');
+    const fadeElements = document.querySelectorAll(".fade-in");
 
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('appear');
-            }
+            if (entry.isIntersecting) entry.target.classList.add("appear");
         });
     }, { threshold: 0.2 });
 
-    fadeElements.forEach(el => {
-        observer.observe(el);
-    });
+    fadeElements.forEach(el => observer.observe(el));
 });
 </script>
+
+
+
+<!-- ======================================================
+     NAVBAR SCROLL EFFECT
+====================================================== -->
 <script>
 window.addEventListener("scroll", () => {
     const navbar = document.querySelector(".navbar");
-    if (window.scrollY > 20) {
-        navbar.classList.add("scrolled");
-    } else {
-        navbar.classList.remove("scrolled");
-    }
+    navbar.classList.toggle("scrolled", window.scrollY > 20);
 });
 </script>
+
+
+
+<!-- ======================================================
+     SHOW PARTICLES AFTER HERO SECTION
+====================================================== -->
 <script>
 document.addEventListener("scroll", () => {
-    const heroHeight = document.querySelector(".hero-image").offsetHeight;
+
+    const hero = document.querySelector(".hero-image");
+    if (!hero) return;   // Prevents errors on About/Services/Contact pages
+
+    const heroHeight = hero.offsetHeight;
     const particles = document.getElementById("particles-wrapper");
 
     if (window.scrollY < heroHeight - 50) {
-        // Still inside hero → hide particles
-        particles.classList.add("hidden");
+        particles.classList.add("hidden");   // Hide particles during hero
     } else {
-        // Past hero → show particles
-        particles.classList.remove("hidden");
+        particles.classList.remove("hidden"); // Show below hero
     }
 });
 </script>
 
-</body>
-</html>
+
+
+<!-- ======================================================
+     PARALLAX SCROLL SIMULATION
+====================================================== -->
+<script>
+window.addEventListener("scroll", () => {
+    const hero = document.querySelector(".hero-image");
+    if (!hero) return;
+
+    const scrollY = window.scrollY;
+
+    // browsers like Safari block background-attachment: fixed, so we simulate manually:
+    hero.style.backgroundPosition = `center ${scro

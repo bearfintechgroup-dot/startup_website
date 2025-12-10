@@ -1,24 +1,38 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
+
+<section class="contact-section fade-in">
+
     <h1>Contact Us</h1>
 
-    <!-- Flash messages -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        {% for category, message in messages %}
-          <div class="flash {{ category }}">{{ message }}</div>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
+    <p class="contact-intro">
+        Have a question, project idea, or partnership opportunity?
+        Send us a message and we’ll respond shortly.
+    </p>
+
+    <!-- Flash Messages -->
+    <div class="flash-wrapper fade-in delay-1">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
 
     <!-- Contact Form -->
-    <form action="/contact" method="POST" class="contact-form">
+    <form action="/contact" method="POST" class="contact-form fade-in delay-2">
         <input type="text" name="name" placeholder="Your Name" required>
+
         <input type="email" name="email" placeholder="Your Email" required>
+
         <textarea name="message" placeholder="Your Message" required></textarea>
-        <button type="submit">Send</button>
+
+        <button type="submit">Send Message</button>
     </form>
-</div>
+
+</section>
+
 {% endblock %}
