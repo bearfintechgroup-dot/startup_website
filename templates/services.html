@@ -2,82 +2,130 @@
 
 {% block content %}
 
+<!-- HERO -->
 <section class="services-hero fade-in">
     <h1>Our Services</h1>
-    <p>Integrated financial and technological solutions built for modern challenges.</p>
+    <p>Modern financial intelligence, advanced software development, and innovation-driven solutions.</p>
 </section>
 
+<div class="section-divider"></div>
 
-<!-- ================================
-     SERVICE CATEGORIES
-================================ -->
+<!-- PREMIUM SERVICE GRID -->
 <section class="services-section fade-in delay-1">
 
     <div class="services-detail-grid">
 
-        <!-- FINTECH SERVICE -->
+        <!-- FINANCIAL SERVICES -->
         <div class="service-detail-card fade-in delay-1">
             <img src="{{ url_for('static', filename='images/fintech.svg') }}" class="service-detail-icon">
+
             <h3>Financial Services</h3>
             <p>
-                Data-driven tools, investment frameworks, and strategic insights designed to help
-                individuals and businesses grow confidently in a rapidly shifting financial landscape.
+                Empowering smarter decision-making through data-driven tools and financial intelligence.
             </p>
 
             <ul class="service-list">
                 <li>Investment strategy tools</li>
-                <li>Market analysis & insights</li>
-                <li>Portfolio tracking systems</li>
-                <li>Automation & reporting</li>
+                <li>Market insights & analysis</li>
+                <li>Portfolio tracking dashboards</li>
+                <li>Automation & reporting systems</li>
             </ul>
         </div>
 
-
-        <!-- TECHNOLOGY SERVICE -->
+        <!-- TECHNOLOGY DEVELOPMENT -->
         <div class="service-detail-card fade-in delay-2">
             <img src="{{ url_for('static', filename='images/tech.svg') }}" class="service-detail-icon">
+
             <h3>Technology Development</h3>
             <p>
-                Engineering modern web and software experiences that are scalable, stable, and built to
-                deliver real-world utility.
+                Building modern digital experiences that are scalable, efficient, and user-focused.
             </p>
 
             <ul class="service-list">
-                <li>Web development</li>
-                <li>Software creation</li>
-                <li>User-focused digital systems</li>
-                <li>Custom automation tools</li>
+                <li>Web & application development</li>
+                <li>Software design & architecture</li>
+                <li>Process automation tools</li>
+                <li>Custom digital systems</li>
             </ul>
         </div>
-
 
         <!-- INNOVATION LAB -->
         <div class="service-detail-card fade-in delay-3">
             <img src="{{ url_for('static', filename='images/innovation.svg') }}" class="service-detail-icon">
+
             <h3>Innovation Lab</h3>
             <p>
-                A creative environment where future-focused ideas are shaped, tested, and turned into
-                meaningful digital experiences.
+                A creative environment for building future-focused prototypes and interactive systems.
             </p>
 
             <ul class="service-list">
-                <li>Prototyping & concept testing</li>
+                <li>Concept development</li>
+                <li>Rapid prototyping & testing</li>
                 <li>Interactive visual systems</li>
-                <li>Automation innovation</li>
-                <li>Emerging technology exploration</li>
+                <li>Emerging technology research</li>
             </ul>
         </div>
 
     </div>
 </section>
 
+<div class="section-divider"></div>
 
-<!-- CTA SECTION (consistent with homepage) -->
-<section class="cta-section fade-in delay-3">
+<!-- COMPARISON GRID -->
+<section class="comparison-section fade-in delay-3">
+    <h2 class="comparison-title">What Makes Each Service Unique?</h2>
+
+    <div class="comparison-grid">
+
+        <!-- COLUMN 1 -->
+        <div class="comparison-card">
+            <h3>Financial Services</h3>
+            <ul>
+                <li>Data-driven investment tools</li>
+                <li>Market intelligence & insights</li>
+                <li>Automated financial reporting</li>
+                <li>Portfolio tracking systems</li>
+                <li>Strategic growth framework</li>
+            </ul>
+        </div>
+
+        <!-- COLUMN 2 -->
+        <div class="comparison-card">
+            <h3>Technology Development</h3>
+            <ul>
+                <li>Custom software creation</li>
+                <li>Modern web development</li>
+                <li>Automation-focused design</li>
+                <li>System architecture planning</li>
+                <li>Optimized user experience</li>
+            </ul>
+        </div>
+
+        <!-- COLUMN 3 -->
+        <div class="comparison-card">
+            <h3>Innovation Lab</h3>
+            <ul>
+                <li>Concept prototyping</li>
+                <li>Visual and interactive systems</li>
+                <li>Emerging tech exploration</li>
+                <li>Experimental design workflows</li>
+                <li>Rapid testing environment</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+
+<!-- CTA (Matches Homepage) -->
+<section class="cta-section fade-in delay-4">
     <h2>Ready to Build Something Powerful?</h2>
-    <p>Tell us your idea. We'll turn it into a real digital solution.</p>
-    <a href="/contact" class="cta-button">Get Started</a>
+    <p>Tell us your idea. We’ll craft a solution built for impact and long-term growth.</p>
+    <a href="/contact" class="cta-button">Start Your Project</a>
 </section>
 
 {% endblock %}
+
 

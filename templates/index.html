@@ -3,22 +3,25 @@
 {% block content %}
 
 <!-- HERO SECTION -->
-<div class="hero-image">
+<section class="hero-image">
     <div class="hero-content fade-in">
-        <h1>
-            A SHARED, IMMERSIVE,<br>
-            AND INNOVATIVE<br>
-            DIGITAL PLATFORM
+        <h1 class="hero-title">
+            Empowering Finance & Technology<br>
+            <span class="hero-gradient">For What Comes Next.</span>
         </h1>
 
-        <p>
-            Building modern digital solutions that merge technology, creativity,
-            and real-world financial impact.
+        <p class="hero-subtext">
+            Tools, intelligence, and digital systems engineered to help individuals and businesses
+            grow in a rapidly evolving world.
         </p>
 
-        <a href="/contact" class="hero-button">Get Started</a>
+        <div class="hero-cta">
+            <a href="/services" class="hero-button">Explore Services</a>
+            <a href="/about" class="hero-button-outline">Our Vision</a>
+        </div>
     </div>
-</div>
+</section>
+
 
 <div class="section-divider"></div>
 
@@ -37,46 +40,35 @@
 
 
 <!-- SERVICES SECTION -->
-<section class="services-section fade-in delay-2">
+<section class="services-section fade-in">
     <h2>Our Core Services</h2>
+    <p class="services-tagline">
+        A modern blend of finance, software, and innovation — built for growth and long-term impact.
+    </p>
 
-    <div class="services-grid">
+    <div class="premium-services-grid">
 
-        <!-- SERVICE 1 -->
-        <a href="/services" class="service-card-link fade-in delay-1">
-            <div class="service-card">
-                <img src="{{ url_for('static', filename='images/fintech.svg') }}" class="service-icon">
-                <h3>Financial Services</h3>
-                <p>
-                    Smart investment tools, modern financial systems, and data-driven strategies designed for growth.
-                </p>
-            </div>
-        </a>
+        <div class="premium-service-card">
+            <img src="{{ url_for('static', filename='images/fintech.svg') }}" class="premium-icon">
+            <h3>Financial Services</h3>
+            <p>Smart insights, investment tools, and data-driven systems engineered for real-world financial decisions.</p>
+        </div>
 
-        <!-- SERVICE 2 -->
-        <a href="/services" class="service-card-link fade-in delay-2">
-            <div class="service-card">
-                <img src="{{ url_for('static', filename='images/tech.svg') }}" class="service-icon">
-                <h3>Technology Development</h3>
-                <p>
-                    High-performance websites, modern applications, and scalable software built with precision.
-                </p>
-            </div>
-        </a>
+        <div class="premium-service-card">
+            <img src="{{ url_for('static', filename='images/tech.svg') }}" class="premium-icon">
+            <h3>Technology Development</h3>
+            <p>Modern web and software experiences designed with scalability, clarity, and performance in mind.</p>
+        </div>
 
-        <!-- SERVICE 3 -->
-        <a href="/services" class="service-card-link fade-in delay-3">
-            <div class="service-card">
-                <img src="{{ url_for('static', filename='images/innovation.svg') }}" class="service-icon">
-                <h3>Innovation Lab</h3>
-                <p>
-                    A creative engineering space where new ideas, prototypes, and digital automation systems come to life.
-                </p>
-            </div>
-        </a>
+        <div class="premium-service-card">
+            <img src="{{ url_for('static', filename='images/innovation.svg') }}" class="premium-icon">
+            <h3>Innovation Lab</h3>
+            <p>Exploring next-gen solutions, automation concepts, and user-focused prototypes for the future.</p>
+        </div>
 
     </div>
 </section>
+
 
 <div class="section-divider"></div>
 
@@ -98,7 +90,7 @@
         </div>
 
         <div class="why-item fade-in delay-3">
-            <h4>Human-Centered Design</h4>
+            <h4>Accessible Design</h4>
             <p>Technology crafted to feel intuitive, meaningful, and seamless to use.</p>
         </div>
 
@@ -106,6 +98,54 @@
 </section>
 
 <div class="section-divider"></div>
+
+<section class="roadmap-section fade-in">
+    <h2>Roadmap & Coming Soon</h2>
+    <p class="roadmap-intro">
+        A glimpse into the future of Bear Fintech Group—tools and platforms designed to make
+        finance and technology more accessible, intelligent, and intuitive.
+    </p>
+
+    <div class="roadmap-grid">
+
+        <div class="roadmap-card">
+            <h3>Market Analytics Dashboard</h3>
+            <p>
+                A clean, user-friendly dashboard offering real-time insights, risk metrics,
+                and simplified market trends for everyday investors.
+            </p>
+            <span class="roadmap-tag in-progress">In Development</span>
+        </div>
+
+        <div class="roadmap-card">
+            <h3>Automation Toolkit</h3>
+            <p>
+                A collection of smart automation tools designed to save time, improve accuracy,
+                and streamline workflows for individuals and small businesses.
+            </p>
+            <span class="roadmap-tag planned">Planned</span>
+        </div>
+
+        <div class="roadmap-card">
+            <h3>Investment Insights App</h3>
+            <p>
+                A lightweight app providing easy-to-understand financial insights,
+                personalized suggestions, and investor education resources.
+            </p>
+            <span class="roadmap-tag concept">Concept Stage</span>
+        </div>
+
+        <div class="roadmap-card">
+            <h3>Client Portal</h3>
+            <p>
+                A secure, long-term platform for clients to access tools, track activity,
+                and collaborate with Bear Fintech services in a seamless environment.
+            </p>
+            <span class="roadmap-tag long-term">Long-Term</span>
+        </div>
+
+    </div>
+</section>
 
 
 <!-- CALL TO ACTION -->

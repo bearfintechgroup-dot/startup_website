@@ -162,6 +162,100 @@ section p {
     color: #ddd;
 }
 
+/* ============================================================
+   PREMIUM HERO UPGRADE – FOUNDERS VISION
+============================================================ */
+
+.hero-title {
+    font-size: 52px;
+    line-height: 1.2;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.hero-gradient {
+    background: linear-gradient(90deg, #7f5cff, #5b9dff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 18px rgba(127, 92, 255, 0.35);
+}
+
+.hero-subtext {
+    font-size: 20px;
+    color: #e9e6ff;
+    margin: 0 auto;
+    max-width: 650px;
+    text-align: center;
+    margin-bottom: 32px;
+    line-height: 1.6;
+}
+
+.hero-cta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.hero-button {
+    padding: 14px 32px;
+    background: linear-gradient(90deg, #7f5cff, #5b9dff);
+    color: white;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s ease;
+    box-shadow: 0 0 15px rgba(127,92,255,0.25);
+}
+
+.hero-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 22px rgba(127,92,255,0.45);
+}
+
+.hero-button-outline {
+    padding: 14px 32px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    border: 2px solid #7f5cff;
+    color: #dcd6ff;
+    transition: 0.3s ease;
+}
+
+.hero-button-outline:hover {
+    background: rgba(127,92,255,0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 0 18px rgba(127,92,255,0.45);
+}
+
+/* MOBILE HERO OPTIMIZATION */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 34px;
+        line-height: 1.25;
+    }
+
+    .hero-subtext {
+        font-size: 16px;
+        max-width: 90%;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .hero-button,
+    .hero-button-outline {
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+    }
+}
+
 /* Services grid on home */
 
 .services-grid {
@@ -627,6 +721,104 @@ section p {
     left: 0;
 }
 
+/* ============================================================
+   ROADMAP / COMING SOON SECTION
+============================================================ */
+
+.roadmap-section {
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.roadmap-section h2 {
+    font-size: 38px;
+    color: #b388ff;
+    margin-bottom: 15px;
+}
+
+.roadmap-intro {
+    color: #e0d8ff;
+    font-size: 18px;
+    max-width: 750px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+}
+
+/* Grid layout */
+.roadmap-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+/* Individual roadmap cards */
+.roadmap-card {
+    background: rgba(255,255,255,0.06);
+    padding: 25px;
+    border-radius: 18px;
+    width: 300px;
+    text-align: left;
+    backdrop-filter: blur(12px);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.roadmap-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(127,92,255,0.25);
+}
+
+.roadmap-card h3 {
+    color: #b388ff;
+    margin-bottom: 10px;
+}
+
+.roadmap-card p {
+    color: #f0f0ff;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+/* STATUS TAGS */
+.roadmap-tag {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+/* Tag color codes */
+.roadmap-tag.in-progress {
+    background: rgba(127,92,255,0.3);
+    color: #d7c9ff;
+}
+
+.roadmap-tag.planned {
+    background: rgba(91,157,255,0.25);
+    color: #cfe4ff;
+}
+
+.roadmap-tag.concept {
+    background: rgba(255,255,255,0.12);
+    color: #eae5ff;
+}
+
+.roadmap-tag.long-term {
+    background: rgba(100,100,100,0.22);
+    color: #cccccc;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .roadmap-card {
+        width: 90%;
+    }
+}
 
 /* ============================================================
    CONTACT PAGE (PREMIUM TWO-COLUMN)
@@ -829,6 +1021,41 @@ section p {
     font-size: 14px;
 }
 
+/* ============================================================
+   PREMIUM FOOTER UPGRADE
+============================================================ */
+
+.footer-col {
+    flex: 1;
+    min-width: 220px;
+}
+
+.footer-col h3, .footer-col h4 {
+    color: #b388ff !important;
+    margin-bottom: 12px;
+}
+
+.footer-col p, .footer-col a {
+    color: #e6e2ff !important;
+    font-size: 15px;
+}
+
+.footer-col a {
+    display: block;
+    margin-bottom: 8px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.footer-col a:hover {
+    color: #b388ff !important;
+    transform: translateX(4px);
+}
+
+.footer-logo {
+    width: 55px;
+    margin-bottom: 10px;
+}
 
 /* ============================================================
    ERROR PAGES (404 / 500)
@@ -1096,4 +1323,165 @@ h1, h2, h3, h4 {
         text-align: center;
         align-items: center;
     }
+}
+/* ============================================================
+   PREMIUM SERVICE CARDS UPGRADE
+============================================================ */
+
+.services-tagline {
+    color: #eae6ff !important;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+
+.premium-services-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.premium-service-card {
+    width: 320px;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(14px);
+
+    border: 1px solid rgba(255,255,255,0.10);
+    box-shadow: 0 0 20px rgba(127,92,255,0.15);
+
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease,
+                background 0.3s ease;
+}
+
+.premium-service-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255,255,255,0.12);
+    box-shadow: 0 0 30px rgba(127,92,255,0.35);
+}
+
+.premium-service-card h3 {
+    margin-top: 12px;
+    margin-bottom: 14px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffffff !important;
+}
+
+.premium-service-card p {
+    color: #f0f0ff !important;
+    line-height: 1.6;
+}
+
+.premium-icon {
+    width: 70px;
+    height: 70px;
+    filter: drop-shadow(0 0 8px rgba(127,92,255,0.4));
+}
+
+/* MOBILE OPTIMIZATION */
+@media (max-width: 768px) {
+    .premium-service-card {
+        width: 90%;
+        padding: 25px;
+    }
+}
+
+/* ============================================================
+   PREMIUM COMPARISON GRID
+============================================================ */
+
+.comparison-section {
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.comparison-title {
+    font-size: 34px;
+    margin-bottom: 35px;
+    color: #b388ff;
+}
+
+.comparison-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.comparison-card {
+    width: 300px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 25px;
+    transition: 0.3s ease;
+    box-shadow: 0 0 12px rgba(127,92,255,0.15);
+}
+
+.comparison-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(127,92,255,0.25);
+}
+
+.comparison-card h3 {
+    color: #b388ff;
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.comparison-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.comparison-card li {
+    margin-bottom: 10px;
+    color: #e8e8ff;
+    font-size: 16px;
+    line-height: 1.5;
+    text-shadow: 0 0 4px rgba(0,0,0,0.4);
+}
+
+/* Mobile layout */
+@media (max-width: 768px) {
+    .comparison-card {
+        width: 90%;
+    }
+}
+
+/* ============================================================
+   PREMIUM SCROLL ANIMATION UPGRADE
+============================================================ */
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+        opacity 0.9s ease,
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fade-in.appear {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-rise {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: 1.1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.fade-rise.appear {
+    opacity: 1;
+    transform: translateY(0);
 }

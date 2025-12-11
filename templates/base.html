@@ -81,34 +81,33 @@
 <footer class="footer">
     <div class="footer-content">
 
-        <!-- BRAND -->
-        <div class="footer-left">
-            <img src="{{ url_for('static', filename='images/bear_logo.svg') }}" class="footer-logo" alt="Bear Logo">
-            <h3 class="footer-brand">BEAR FINTECH GROUP</h3>
-            <p class="footer-tagline">Innovating Finance & Technology.</p>
+        <div class="footer-col">
+            <img src="{{ url_for('static', filename='images/bear_logo.svg') }}" class="footer-logo">
+            <h3>BEAR FINTECH GROUP</h3>
+            <p>Where finance meets innovation. Tools and systems engineered for real-world impact.</p>
         </div>
 
-        <!-- NAV LINKS -->
-        <div class="footer-links">
+        <div class="footer-col">
             <h4>Explore</h4>
-            <a href="/" data-nav="true">Home</a>
-            <a href="/about" data-nav="true">About</a>
-            <a href="/services" data-nav="true">Services</a>
-            <a href="/contact" data-nav="true">Contact</a>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/services">Services</a>
+            <a href="/contact">Contact</a>
         </div>
 
-        <!-- CONTACT INFO -->
-        <div class="footer-contact">
+        <div class="footer-col">
             <h4>Contact</h4>
-            <p>Email: bearfintechgroup@gmail.com</p>
-            <p>Location: Calgary, Alberta</p>
+            <p>Calgary, Alberta</p>
+            <p>bearfintechgroup@gmail.com</p>
         </div>
+
     </div>
 
     <div class="footer-bottom">
-        <p>© {{ now().year }} BEAR FINTECH GROUP — All Rights Reserved.</p>
+        <p>© {{ now().year }} Bear Fintech Group — All Rights Reserved.</p>
     </div>
 </footer>
+
 
 
 <!-- ======================================================
@@ -123,18 +122,20 @@
 ====================================================== -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    const fadeElements = document.querySelectorAll(".fade-in");
+    const animatedItems = document.querySelectorAll(".fade-in, .fade-rise");
 
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if (entry.isIntersecting)
+            if (entry.isIntersecting) {
                 entry.target.classList.add("appear");
+            }
         });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.15 });
 
-    fadeElements.forEach(el => observer.observe(el));
+    animatedItems.forEach(el => observer.observe(el));
 });
 </script>
+
 
 
 <!-- ======================================================
