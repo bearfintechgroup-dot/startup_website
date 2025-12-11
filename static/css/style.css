@@ -655,28 +655,28 @@ section p {
 }
 
 /* ============================================================
-   HAMBURGER MENU (MOBILE NAVIGATION)
+   MOBILE NAV MENU BEHAVIOR
 ============================================================ */
 
 .hamburger {
     display: none;
     flex-direction: column;
-    gap: 5px;
     cursor: pointer;
-    z-index: 999;
+    gap: 6px;
+    z-index: 200;
 }
 
 .hamburger span {
     width: 28px;
     height: 3px;
-    background: #ffffff;
-    border-radius: 3px;
-    transition: 0.3s ease;
+    background: white;
+    border-radius: 4px;
+    transition: 0.3s;
 }
 
-/* Animate to "X" when active */
+/* Hamburger transforms into X */
 .hamburger.active span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
+    transform: rotate(45deg) translateY(8px);
 }
 
 .hamburger.active span:nth-child(2) {
@@ -684,41 +684,43 @@ section p {
 }
 
 .hamburger.active span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+    transform: rotate(-45deg) translateY(-8px);
 }
 
-/* Mobile nav panel */
-.nav-links.open {
-    display: flex !important;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Base hidden state on mobile */
+/* MOBILE ONLY */
 @media (max-width: 768px) {
+
     .nav-links {
         position: absolute;
-        top: 75px;
-        right: 0;
-        width: 100%;
-        flex-direction: column;
-        align-items: center;
-        gap: 18px;
-        padding: 25px 0;
-
-        background: rgba(0,0,0,0.55);
-        backdrop-filter: blur(10px);
-
+        top: 70px;
+        right: 20px;
+        background: rgba(0,0,0,0.75);
+        backdrop-filter: blur(12px);
+        padding: 20px;
+        border-radius: 12px;
         display: none;
-        opacity: 0;
-        transform: translateY(-10px);
-        transition: opacity 0.3s ease, transform 0.3s ease;
+        flex-direction: column;
+        gap: 15px;
+        width: 200px;
+        text-align: right;
+        z-index: 150;
+    }
+
+    /* This makes menu appear */
+    .nav-links.open {
+        display: flex;
     }
 
     .hamburger {
         display: flex;
     }
+
+    .nav-links a {
+        font-size: 18px;
+        color: white;
+    }
 }
+
 
 /* ============================================================
    MOBILE RESPONSIVE (Unified)
