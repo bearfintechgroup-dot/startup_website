@@ -24,6 +24,15 @@
 <!-- Subtle dark overlay -->
 <div class="hero-overlay"></div>
 
+<!-- FULLSCREEN PAGE LOADER -->
+<div id="page-loader">
+    <div class="loader-glass">
+        <img src="{{ url_for('static', filename='images/bear_logo.svg') }}" class="loader-logo" alt="Bear Logo">
+        <p class="loader-text">Preparing your experience...</p>
+        <p class="loader-subtext">BEAR FINTECH GROUP</p>
+    </div>
+</div>
+
 <!-- NAVIGATION BAR -->
 <nav class="navbar">
     <div class="nav-left">
@@ -31,17 +40,58 @@
         <span class="brand-name">BEAR FINTECH GROUP</span>
     </div>
 
+<!-- HAMBURGER ICON (MOBILE) -->
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
     <div class="nav-links">
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/services">Services</a>
-        <a href="/contact">Contact</a>
+        <a href="/" data-nav="true">Home</a>
+        <a href="/about" data-nav="true">About</a>
+        <a href="/services" data-nav="true">Services</a>
+        <a href="/contact" data-nav="true">Contact</a>
     </div>
 </nav>
 
 <!-- MAIN PAGE CONTENT -->
 {% block content %}{% endblock %}
 
+<!-- ======================================================
+     FOOTER
+====================================================== -->
+<footer class="footer">
+    <div class="footer-content">
+
+        <!-- BRAND -->
+        <div class="footer-left">
+            <img src="{{ url_for('static', filename='images/bear_logo.svg') }}" class="footer-logo" alt="Bear Logo">
+            <h3 class="footer-brand">BEAR FINTECH GROUP</h3>
+            <p class="footer-tagline">Innovating Finance & Technology.</p>
+        </div>
+
+        <!-- NAV LINKS -->
+        <div class="footer-links">
+            <h4>Explore</h4>
+            <a href="/" data-nav="true">Home</a>
+            <a href="/about" data-nav="true">About</a>
+            <a href="/services" data-nav="true">Services</a>
+            <a href="/contact" data-nav="true">Contact</a>
+        </div>
+
+        <!-- CONTACT INFO -->
+        <div class="footer-contact">
+            <h4>Contact</h4>
+            <p>Email: bearfintechgroup@gmail.com</p>
+            <p>Location: Calgary, Alberta</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© {{ now().year }} BEAR FINTECH GROUP — All Rights Reserved.</p>
+    </div>
+</footer>
 
 
 <!-- ======================================================
@@ -49,7 +99,6 @@
 ====================================================== -->
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script src="{{ url_for('static', filename='js/particles-config.js') }}"></script>
-
 
 
 <!-- ======================================================
@@ -61,14 +110,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add("appear");
+            if (entry.isIntersecting)
+                entry.target.classList.add("appear");
         });
     }, { threshold: 0.2 });
 
     fadeElements.forEach(el => observer.observe(el));
 });
 </script>
-
 
 
 <!-- ======================================================
@@ -82,31 +131,28 @@ window.addEventListener("scroll", () => {
 </script>
 
 
-
 <!-- ======================================================
      SHOW PARTICLES AFTER HERO SECTION
 ====================================================== -->
 <script>
 document.addEventListener("scroll", () => {
-
     const hero = document.querySelector(".hero-image");
-    if (!hero) return;   // Prevents errors on About/Services/Contact pages
+    if (!hero) return;
 
     const heroHeight = hero.offsetHeight;
     const particles = document.getElementById("particles-wrapper");
 
     if (window.scrollY < heroHeight - 50) {
-        particles.classList.add("hidden");   // Hide particles during hero
+        particles.classList.add("hidden");
     } else {
-        particles.classList.remove("hidden"); // Show below hero
+        particles.classList.remove("hidden");
     }
 });
 </script>
 
 
-
 <!-- ======================================================
-     PARALLAX SCROLL SIMULATION
+     PARALLAX SIMULATION
 ====================================================== -->
 <script>
 window.addEventListener("scroll", () => {
@@ -114,6 +160,74 @@ window.addEventListener("scroll", () => {
     if (!hero) return;
 
     const scrollY = window.scrollY;
+    hero.style.backgroundPosition = `center ${scrollY * 0.4}px`;
+});
+</script>
 
-    // browsers like Safari block background-attachment: fixed, so we simulate manually:
-    hero.style.backgroundPosition = `center ${scro
+
+<!-- ======================================================
+     FULLSCREEN LOADER LOGIC
+====================================================== -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const loader = document.getElementById("page-loader");
+
+    // Hide loader once page is ready
+    if (loader) {
+        setTimeout(() => {
+            loader.classList.add("loader-hidden");
+        }, 300); // short delay for nicer effect
+    }
+
+    // Show loader on internal navigation clicks
+    const navLinks = document.querySelectorAll('a[data-nav="true"]');
+
+    navLinks.forEach(link => {
+        link.addEventListener("click", (e) => {
+            const href = link.getAttribute("href");
+
+            // Ignore empty or hash links
+            if (!href || href.startsWith("#")) return;
+
+            e.preventDefault();
+
+            if (loader) {
+                loader.classList.remove("loader-hidden");
+            }
+
+            // Slight delay before navigating so animation is visible
+            setTimeout(() => {
+                window.location.href = href;
+            }, 200);
+        });
+    });
+});
+</script>
+
+<script>
+const hamburger = document.getElementById("hamburger");
+const navLinksMenu = document.getElementById("nav-links");
+
+// Toggle menu open/close
+hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    navLinksMenu.classList.toggle("open");
+});
+</script>
+
+<script>
+// Auto-close hamburger menu when a nav link is clicked (mobile UX fix)
+document.querySelectorAll("#nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+        const hamburger = document.getElementById("hamburger");
+        const navLinksMenu = document.getElementById("nav-links");
+
+        hamburger.classList.remove("active");
+        navLinksMenu.classList.remove("open");
+    });
+});
+</script>
+
+
+</body>
+</html>

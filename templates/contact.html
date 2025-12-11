@@ -2,17 +2,45 @@
 
 {% block content %}
 
-<section class="contact-section fade-in">
-
+<!-- CONTACT HEADER -->
+<section class="contact-hero fade-in">
     <h1>Contact Us</h1>
+    <p>We’re here to help you build the future. Reach out and let's begin.</p>
+</section>
 
-    <p class="contact-intro">
-        Have a question, project idea, or partnership opportunity?
-        Send us a message and we’ll respond shortly.
-    </p>
 
-    <!-- Flash Messages -->
-    <div class="flash-wrapper fade-in delay-1">
+<!-- CONTACT WRAPPER -->
+<section class="contact-wrapper fade-in delay-1">
+
+    <!-- LEFT SIDE — INFO PANEL -->
+    <div class="contact-info">
+        <h2>Get In Touch</h2>
+        <p>
+            Whether you’re exploring an idea, need a custom digital solution, or want to collaborate —
+            BEAR FINTECH GROUP is ready to support your vision.
+        </p>
+
+        <div class="info-item">
+            <span class="info-label">Email:</span>
+            <p>bearfintechgroup@gmail.com</p>
+        </div>
+
+        <div class="info-item">
+            <span class="info-label">Location:</span>
+            <p>Calgary, Alberta</p>
+        </div>
+
+        <div class="info-item">
+            <span class="info-label">Response Time:</span>
+            <p>Within 24–48 hours</p>
+        </div>
+    </div>
+
+
+    <!-- RIGHT SIDE — FORM -->
+    <div class="contact-form-container">
+
+        <!-- Flash messages -->
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
@@ -20,18 +48,16 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
+
+        <form action="/contact" method="POST" class="contact-form">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+
+            <button type="submit" class="contact-submit">Send Message</button>
+        </form>
+
     </div>
-
-    <!-- Contact Form -->
-    <form action="/contact" method="POST" class="contact-form fade-in delay-2">
-        <input type="text" name="name" placeholder="Your Name" required>
-
-        <input type="email" name="email" placeholder="Your Email" required>
-
-        <textarea name="message" placeholder="Your Message" required></textarea>
-
-        <button type="submit">Send Message</button>
-    </form>
 
 </section>
 

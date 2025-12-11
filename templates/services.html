@@ -2,44 +2,82 @@
 
 {% block content %}
 
-<section class="services-section fade-in">
+<section class="services-hero fade-in">
     <h1>Our Services</h1>
+    <p>Integrated financial and technological solutions built for modern challenges.</p>
+</section>
 
-    <p>
-        We provide a growing suite of digital and financial solutions designed to meet the evolving needs
-        of individuals, entrepreneurs, and modern businesses.
-    </p>
 
-    <div class="services-grid fade-in delay-1">
+<!-- ================================
+     SERVICE CATEGORIES
+================================ -->
+<section class="services-section fade-in delay-1">
 
-        <div class="service-card">
-            <img src="{{ url_for('static', filename='images/fintech.svg') }}" class="service-icon">
+    <div class="services-detail-grid">
+
+        <!-- FINTECH SERVICE -->
+        <div class="service-detail-card fade-in delay-1">
+            <img src="{{ url_for('static', filename='images/fintech.svg') }}" class="service-detail-icon">
             <h3>Financial Services</h3>
             <p>
-                Intelligent financial tools, investment insights, and personalized digital strategies
-                designed to support long-term growth and financial confidence.
+                Data-driven tools, investment frameworks, and strategic insights designed to help
+                individuals and businesses grow confidently in a rapidly shifting financial landscape.
             </p>
+
+            <ul class="service-list">
+                <li>Investment strategy tools</li>
+                <li>Market analysis & insights</li>
+                <li>Portfolio tracking systems</li>
+                <li>Automation & reporting</li>
+            </ul>
         </div>
 
-        <div class="service-card">
-            <img src="{{ url_for('static', filename='images/tech.svg') }}" class="service-icon">
+
+        <!-- TECHNOLOGY SERVICE -->
+        <div class="service-detail-card fade-in delay-2">
+            <img src="{{ url_for('static', filename='images/tech.svg') }}" class="service-detail-icon">
             <h3>Technology Development</h3>
             <p>
-                Full-stack website creation, modern application development, system automation,
-                and custom-built software tailored to your goals.
+                Engineering modern web and software experiences that are scalable, stable, and built to
+                deliver real-world utility.
             </p>
+
+            <ul class="service-list">
+                <li>Web development</li>
+                <li>Software creation</li>
+                <li>User-focused digital systems</li>
+                <li>Custom automation tools</li>
+            </ul>
         </div>
 
-        <div class="service-card">
-            <img src="{{ url_for('static', filename='images/innovation.svg') }}" class="service-icon">
+
+        <!-- INNOVATION LAB -->
+        <div class="service-detail-card fade-in delay-3">
+            <img src="{{ url_for('static', filename='images/innovation.svg') }}" class="service-detail-icon">
             <h3>Innovation Lab</h3>
             <p>
-                Experimental prototypes, data automation tools, AI-assisted workflows, and next-gen
-                digital experiences built in our creative engineering space.
+                A creative environment where future-focused ideas are shaped, tested, and turned into
+                meaningful digital experiences.
             </p>
+
+            <ul class="service-list">
+                <li>Prototyping & concept testing</li>
+                <li>Interactive visual systems</li>
+                <li>Automation innovation</li>
+                <li>Emerging technology exploration</li>
+            </ul>
         </div>
 
     </div>
 </section>
 
+
+<!-- CTA SECTION (consistent with homepage) -->
+<section class="cta-section fade-in delay-3">
+    <h2>Ready to Build Something Powerful?</h2>
+    <p>Tell us your idea. We'll turn it into a real digital solution.</p>
+    <a href="/contact" class="cta-button">Get Started</a>
+</section>
+
 {% endblock %}
+

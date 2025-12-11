@@ -4,7 +4,7 @@ from threading import Thread
 from dotenv import load_dotenv
 import os
 import traceback
-
+from datetime import datetime
 # -----------------------------------------
 # Load environment variables
 # -----------------------------------------
@@ -16,6 +16,10 @@ load_dotenv()
 # -----------------------------------------
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY") or "fallback-secret"
+
+@app.context_processor
+def inject_now():
+    return {'now': datetime.utcnow}
 
 
 # -----------------------------------------
@@ -69,46 +73,62 @@ def services():
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
-        name = request.form.get("name")
-        email = request.form.get("email")
-        message_body = request.form.get("message")
+        name = request.form["name"]
+        email = request.form["email"]
+        message_body = request.form["message"]
 
-        # Validate email fields exist
-        if not name or not email or not message_body:
-            flash("Please fill in all fields.", "danger")
-            return redirect(url_for("contact"))
-
-        # Create email message
-        msg = Message(
+        # ---------------------------
+        # 1. Email sent TO YOU
+        # ---------------------------
+        admin_msg = Message(
             subject=f"New Contact Form Submission from {name}",
-            sender=app.config["MAIL_USERNAME"],
-            recipients=[app.config["MAIL_USERNAME"]],
-            body=f"""
-New contact form submission:
-
-Name: {name}
-Email: {email}
-
-Message:
-{message_body}
-""",
+            sender=app.config['MAIL_USERNAME'],
+            recipients=[app.config['MAIL_USERNAME']],
+            body=f"Name: {name}\nEmail: {email}\n\nMessage:\n{message_body}"
         )
 
-        # Try sending email
-        try:
-            Thread(target=send_async_email, args=(app, msg)).start()
-            flash("Your message has been sent successfully!", "success")
-        except Exception as e:
-            print("\n--- EMAIL ERROR ---")
-            print(e)
-            print(traceback.format_exc())
-            print("-------------------\n")
-            flash("An error occurred while sending your message. Please try again.", "danger")
+        # ---------------------------
+        # 2. Confirmation email sent TO USER
+        # ---------------------------
+        user_msg = Message(
+            subject="Thank you for contacting BEAR FINTECH GROUP",
+            sender=app.config['MAIL_USERNAME'],
+            recipients=[email],
+            body=(
+                f"Hi {name},\n\n"
+                "Thank you for reaching out to BEAR FINTECH GROUP.\n"
+                "Your message has been received successfully.\n\n"
+                "We will respond shortly.\n\n"
+                "Best regards,\n"
+                "BEAR FINTECH GROUP"
+            )
+        )
 
-        return redirect(url_for("contact"))
+        try:
+            Thread(target=send_async_email, args=(app, admin_msg)).start()
+            Thread(target=send_async_email, args=(app, user_msg)).start()
+
+            flash("Message sent successfully!", "success")
+
+        except Exception as e:
+            flash(f"An error occurred: {str(e)}", "danger")
+            print("EMAIL ERROR:", e)
+
+        return redirect("/contact")
 
     return render_template("contact.html")
 
+# ----------------------------
+# Custom Error Pages
+# ----------------------------
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html"), 404
+
+@app.errorhandler(500)
+def internal_error(e):
+    return render_template("500.html"), 500
 
 # -----------------------------------------
 # Run Application (local only)

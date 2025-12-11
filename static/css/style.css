@@ -1,6 +1,6 @@
-/* ==========================================
-   RESET & BASE
-   ========================================== */
+/* ============================================================
+   RESET & BASE STYLES
+============================================================ */
 
 html {
     scroll-behavior: smooth;
@@ -34,15 +34,13 @@ section p {
 }
 
 
-
-/* ==========================================
-   PARTICLES & OVERLAY
-   ========================================== */
+/* ============================================================
+   PARTICLES BACKGROUND & OVERLAY
+============================================================ */
 
 #particles-wrapper {
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
     z-index: -2;
@@ -62,19 +60,15 @@ section p {
 
 .hero-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.35);
+    inset: 0;
+    background: rgba(0,0,0,0.35);
     z-index: -1;
 }
 
 
-
-/* ==========================================
-   HERO / HERO IMAGE
-   ========================================== */
+/* ============================================================
+   HERO IMAGE SECTION
+============================================================ */
 
 .hero-image {
     background-image: url('../images/home-hero.png');
@@ -96,10 +90,9 @@ section p {
     content: "";
     position: absolute;
     bottom: 0;
-    left: 0;
     width: 100%;
     height: 120px;
-    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7));
+    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.7));
 }
 
 .hero-content {
@@ -133,10 +126,9 @@ section p {
 }
 
 
-
-/* ==========================================
+/* ============================================================
    GENERIC PAGE CONTAINER
-   ========================================== */
+============================================================ */
 
 .container {
     max-width: 900px;
@@ -145,10 +137,9 @@ section p {
 }
 
 
-
-/* ==========================================
-   ABOUT / SERVICES / WHY SECTIONS
-   ========================================== */
+/* ============================================================
+   HOME PAGE SECTIONS
+============================================================ */
 
 .about-section,
 .services-section,
@@ -172,19 +163,20 @@ section p {
 }
 
 
-
-/* SERVICES GRID */
+/* -------------------------
+   SERVICES GRID
+------------------------- */
 
 .services-grid {
     display: flex;
     justify-content: center;
-    gap: 2rem;
     flex-wrap: wrap;
+    gap: 2rem;
     margin-top: 40px;
 }
 
 .service-card {
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255,255,255,0.06);
     padding: 25px;
     border-radius: 18px;
     width: 280px;
@@ -195,12 +187,16 @@ section p {
 
 .service-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(127, 92, 255, 0.25);
+    box-shadow: 0 10px 25px rgba(127,92,255,0.25);
 }
+
+.service-card p {
+    color: #f5f7ff !important;
+}
+
 
 .service-icon {
     width: 65px;
-    height: 65px;
     margin-bottom: 15px;
     transition: transform 0.3s ease, filter 0.3s ease;
 }
@@ -211,19 +207,19 @@ section p {
 }
 
 
-
-/* WHY GRID */
+/* -------------------------
+   WHY GRID
+------------------------- */
 
 .why-grid {
     display: flex;
     justify-content: center;
-    gap: 2rem;
     flex-wrap: wrap;
-    margin-top: 40px;
+    gap: 2rem;
 }
 
 .why-item {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(255,255,255,0.04);
     padding: 20px;
     border-radius: 16px;
     width: 260px;
@@ -231,36 +227,36 @@ section p {
 }
 
 .why-item h4 {
-    font-size: 22px;
     color: #a57cff;
 }
 
 .why-item p {
-    font-size: 16px;
     color: #ccc;
 }
 
 
-
-/* ==========================================
-   NAVBAR STICKY
-   ========================================== */
+/* ============================================================
+   NAVBAR
+============================================================ */
 
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     padding: 20px 60px;
     position: sticky;
     top: 0;
-    background: rgba(0, 0, 0, 0.10);
+
+    background: rgba(0,0,0,0.10);
     backdrop-filter: blur(10px);
     transition: background 0.3s ease, padding 0.3s ease;
+
     z-index: 100;
 }
 
 .navbar.scrolled {
-    background: rgba(0, 0, 0, 0.55);
+    background: rgba(0,0,0,0.55);
     padding: 12px 40px;
 }
 
@@ -276,6 +272,12 @@ section p {
     cursor: pointer;
 }
 
+.brand-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: #b388ff;
+}
+
 .nav-links a {
     margin: 0 20px;
     color: white;
@@ -288,76 +290,50 @@ section p {
 }
 
 
+/* ============================================================
+   CTA SECTION
+============================================================ */
 
-/* ==========================================
-   CONTACT PAGE — POLISH ADDED
-   ========================================== */
+.cta-section {
+    max-width: 1100px;
+    margin: 100px auto 140px;
+    padding: 60px 20px 90px;
 
-.contact-section {
-    max-width: 900px;
-    margin: 80px auto;
-    padding: 20px;
     text-align: center;
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
 }
 
-.contact-intro {
-    max-width: 700px;
-    margin: 0 auto 30px;
-    font-size: 18px;
-    color: #ccc;
+.cta-section h2 {
+    font-size: 36px;
+    color: #b388ff;
 }
 
-.flash-wrapper {
-    margin-bottom: 20px;
+.cta-section p {
+    color: #ddd;
+    margin-bottom: 28px;
 }
 
-.contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-
-
-/* ==========================================
-   FLASH MESSAGES
-   ========================================== */
-
-.flash {
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    font-weight: bold;
-}
-
-.flash.success {
-    background-color: rgba(0, 255, 0, 0.2);
-    color: #00ff00;
-}
-
-.flash.danger {
-    background-color: rgba(255, 0, 0, 0.2);
-    color: #ff0000;
-}
-
-
-
-/* ==========================================
-   CLICKABLE SERVICE CARDS
-   ========================================== */
-
-.service-card-link {
+.cta-button {
+    padding: 12px 30px;
+    border-radius: 30px;
+    background: linear-gradient(90deg, #7f5cff, #5b9dff);
+    color: white;
     text-decoration: none;
-    color: inherit;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(127,92,255,0.5);
 }
 
 
-
-/* ==========================================
+/* ============================================================
    FADE-IN ANIMATIONS
-   ========================================== */
+============================================================ */
 
 .fade-in {
     opacity: 0;
@@ -375,61 +351,390 @@ section p {
 .delay-3 { transition-delay: 0.6s; }
 
 
+/* ============================================================
+   ABOUT PAGE
+============================================================ */
 
-/* ==========================================
-   CTA SECTION
-   ========================================== */
-
-.cta-section {
+.about-hero {
     text-align: center;
-    margin-top: 100px;
-    padding: 60px 20px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
+    padding: 100px 20px 50px;
 }
 
-.cta-section h2 {
-    font-size: 36px;
+.about-hero h1 {
+    font-size: 40px;
     color: #b388ff;
 }
 
-.cta-button {
-    padding: 12px 30px;
-    background: linear-gradient(90deg, #7f5cff, #5b9dff);
-    color: white;
-    text-decoration: none;
-    border-radius: 30px;
+.about-intro {
+    font-size: 20px;
+    max-width: 850px;
+    margin: 0 auto;
+    color: #e8e4ff;
+}
+
+.about-subsection {
+    max-width: 900px;
+    margin: 60px auto;
+    text-align: center;
+}
+
+.about-subsection h2 {
+    font-size: 30px;
+    color: #b388ff;
+}
+
+.about-subsection p {
+    color: #ddd;
+}
+
+.about-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    max-width: 750px;
+    margin-inline: auto;
+}
+
+.about-list li {
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.05);
+    color: #ddd;
+    margin-bottom: 15px;
+}
+
+
+/* ============================================================
+   SERVICES PAGE
+============================================================ */
+
+.services-hero {
+    text-align: center;
+    padding: 80px 20px 40px;
+}
+
+.services-hero h1 {
+    font-size: 42px;
+    color: #b388ff;
+}
+
+.services-hero p {
+    font-size: 18px;
+    color: #ccc;
+    max-width: 700px;
+    margin: 10px auto 0;
+}
+
+.services-detail-grid {
+    max-width: 1100px;
+    margin: 60px auto;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.service-detail-card {
+    background: rgba(255,255,255,0.05);
+    padding: 25px;
+    border-radius: 18px;
+    width: 300px;
+
+    backdrop-filter: blur(10px);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.service-detail-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(127,92,255,0.25);
+}
+
+.service-detail-card h3 {
+    color: #b388ff;
+}
+
+
+/* ============================================================
+   CONTACT PAGE
+============================================================ */
+
+.contact-hero {
+    text-align: center;
+    padding: 80px 20px 20px;
+}
+
+.contact-hero h1 {
+    font-size: 40px;
+    color: #b388ff;
+}
+
+.contact-hero p {
+    color: #ccc;
+    max-width: 700px;
+    margin: 10px auto 0;
+}
+
+.contact-wrapper {
+    max-width: 1100px;
+    margin: 60px auto;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.contact-info,
+.contact-form-container {
+    flex: 1;
+    min-width: 280px;
+    padding: 30px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.05);
+}
+
+.contact-info h2 {
+    color: #b388ff;
+}
+
+.info-label {
+    color: #b388ff;
     font-weight: bold;
 }
 
 
+/* ============================================================
+   FLASH MESSAGES
+============================================================ */
 
-/* ==========================================
-   MOBILE RESPONSIVE
-   ========================================== */
+.flash {
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.flash.success {
+    background: rgba(0,255,0,0.15);
+    color: #00ff84;
+}
+
+.flash.danger {
+    background: rgba(255,0,0,0.15);
+    color: #ff4d4d;
+}
+
+
+/* ============================================================
+   PREMIUM GLASS FOOTER
+============================================================ */
+
+.footer {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    padding: 60px 20px 30px;
+    margin-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.footer-logo {
+    width: 55px;
+    height: 55px;
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    display: block;
+    color: #ddd;
+    margin-bottom: 8px;
+    transition: 0.25s ease;
+}
+
+.footer-links a:hover {
+    color: #b388ff;
+}
+
+
+/* ============================================================
+   ERROR PAGES
+============================================================ */
+
+.error-page {
+    text-align: center;
+    padding: 120px 20px 80px;
+}
+
+.error-box {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+}
+
+.error-button {
+    padding: 12px 30px;
+    border-radius: 30px;
+    background: linear-gradient(90deg, #7f5cff, #5b9dff);
+    color: white;
+    text-decoration: none;
+}
+
+
+/* ============================================================
+   FULLSCREEN LOADER
+============================================================ */
+
+#page-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+
+    background:
+        radial-gradient(circle at 20% 30%, rgba(123,89,255,0.45), transparent 45%),
+        radial-gradient(circle at 80% 70%, rgba(91,157,255,0.35), transparent 50%),
+        radial-gradient(circle at center, #05010f, #020008);
+}
+
+#page-loader.loader-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loader-glass {
+    background: rgba(15, 10, 40, 0.85);
+    border-radius: 24px;
+    padding: 30px 40px;
+    backdrop-filter: blur(18px);
+    text-align: center;
+    max-width: 320px;
+}
+
+.loader-logo {
+    width: 70px;
+    margin-bottom: 15px;
+    animation: loader-float 2.2s ease-in-out infinite;
+}
+
+.loader-text {
+    color: #e5deff;
+    font-size: 16px;
+}
+
+.loader-subtext {
+    font-size: 13px;
+    color: #bfaaff;
+}
+
+
+/* Loader float animation */
+@keyframes loader-float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+}
+
+/* ============================================================
+   HAMBURGER MENU (MOBILE NAVIGATION)
+============================================================ */
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 999;
+}
+
+.hamburger span {
+    width: 28px;
+    height: 3px;
+    background: #ffffff;
+    border-radius: 3px;
+    transition: 0.3s ease;
+}
+
+/* Animate to "X" when active */
+.hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Mobile nav panel */
+.nav-links.open {
+    display: flex !important;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Base hidden state on mobile */
+@media (max-width: 768px) {
+    .nav-links {
+        position: absolute;
+        top: 75px;
+        right: 0;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+        padding: 25px 0;
+
+        background: rgba(0,0,0,0.55);
+        backdrop-filter: blur(10px);
+
+        display: none;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+}
+
+/* ============================================================
+   MOBILE RESPONSIVE (Unified)
+============================================================ */
 
 @media (max-width: 768px) {
 
     .navbar {
         flex-direction: column;
-        gap: 12px;
         padding: 15px 20px;
-    }
-
-    .nav-left {
-        flex-direction: column;
+        gap: 12px;
     }
 
     .nav-links {
-        display: flex;
         flex-wrap: wrap;
-        justify-content: center;
         gap: 12px;
-    }
-
-    .hero-content {
-        text-align: center;
     }
 
     .hero h1 {
@@ -442,8 +747,40 @@ section p {
     }
 
     .service-card,
-    .why-item {
+    .why-item,
+    .service-detail-card {
         width: 90%;
-        margin: 0 auto;
+    }
+
+    .cta-section {
+        margin: 70px 20px 80px;
+        padding: 50px 20px 80px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .contact-wrapper {
+        flex-direction: column;
     }
 }
+
+
+/* FINAL OVERRIDE — brighten all Services Page text */
+.service-detail-card p,
+.service-detail-card h3,
+.service-list li {
+    color: #ffffff !important;
+    text-shadow: 0 0 4px rgba(0,0,0,0.4);
+}
+/* BRIGHTER HOME PAGE SERVICE TITLES & TEXT */
+.service-card h3,
+.service-card p {
+    color: #ffffff !important;
+    text-shadow: 0 0 4px rgba(0,0,0,0.35);
+}
+
+
