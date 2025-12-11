@@ -49,10 +49,25 @@
 
 <!-- NAV LINKS -->
 <div class="nav-links" id="nav-links">
-    <a href="/" data-nav="true">Home</a>
-    <a href="/about" data-nav="true">About</a>
-    <a href="/services" data-nav="true">Services</a>
-    <a href="/contact" data-nav="true">Contact</a>
+    <a href="/" data-nav="true"
+       class="{% if active_page == 'home' %}active-nav{% endif %}">
+        Home
+    </a>
+
+    <a href="/about" data-nav="true"
+       class="{% if active_page == 'about' %}active-nav{% endif %}">
+        About
+    </a>
+
+    <a href="/services" data-nav="true"
+       class="{% if active_page == 'services' %}active-nav{% endif %}">
+        Services
+    </a>
+
+    <a href="/contact" data-nav="true"
+       class="{% if active_page == 'contact' %}active-nav{% endif %}">
+        Contact
+    </a>
 </div>
 
 </nav>
