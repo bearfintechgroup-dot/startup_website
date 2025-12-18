@@ -1,0 +1,58 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="strategyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7f5cff"/>
+      <stop offset="100%" stop-color="#5b9dff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Board / map frame -->
+  <rect x="10" y="12" width="44" height="40" rx="8"
+        fill="rgba(5,1,15,0.5)"
+        stroke="url(#strategyGrad)"
+        stroke-width="2.4"/>
+
+  <!-- Path line -->
+  <path d="M16 40
+           C22 32, 26 32, 30 28
+           C34 24, 38 22, 48 20"
+        fill="none"
+        stroke="#f5f7ff"
+        stroke-width="2.2"
+        stroke-linecap="round"/>
+
+  <!-- Start marker (circle) -->
+  <circle cx="16" cy="40" r="3.5"
+          fill="#7f5cff"/>
+
+  <!-- Mid marker (diamond) -->
+  <rect x="27.5" y="24.5" width="7" height="7"
+        transform="rotate(45 31 28)"
+        fill="#5b9dff"/>
+
+  <!-- Target marker (X icon) -->
+  <g transform="translate(44,16)">
+    <circle cx="4" cy="4" r="5"
+            fill="none"
+            stroke="#bfaaff"
+            stroke-width="2"/>
+    <path d="M2 2 L6 6 M6 2 L2 6"
+          stroke="#f5f7ff"
+          stroke-width="1.8"
+          stroke-linecap="round"/>
+  </g>
+
+  <!-- Subtle grid -->
+  <line x1="20" y1="20" x2="20" y2="44"
+        stroke="rgba(255,255,255,0.08)"
+        stroke-width="1"/>
+  <line x1="34" y1="20" x2="34" y2="44"
+        stroke="rgba(255,255,255,0.08)"
+        stroke-width="1"/>
+  <line x1="14" y1="28" x2="50" y2="28"
+        stroke="rgba(255,255,255,0.08)"
+        stroke-width="1"/>
+  <line x1="14" y1="36" x2="50" y2="36"
+        stroke="rgba(255,255,255,0.08)"
+        stroke-width="1"/>
+</svg>

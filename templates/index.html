@@ -48,30 +48,63 @@
 
     <div class="premium-services-grid">
 
-        <div class="premium-service-card">
-            <img src="{{ url_for('static', filename='images/fintech.svg') }}" class="premium-icon">
-            <h3>Financial Services</h3>
-            <p>Smart insights, investment tools, and data-driven systems engineered for real-world financial decisions.</p>
-        </div>
+        <!-- Financial Services -->
+        <a href="/services#financial"
+            class="premium-service-link"
+            data-nav="true"
+            data-service="financial">
 
-        <div class="premium-service-card">
-            <img src="{{ url_for('static', filename='images/tech.svg') }}" class="premium-icon">
-            <h3>Technology Development</h3>
-            <p>Modern web and software experiences designed with scalability, clarity, and performance in mind.</p>
-        </div>
+            <div class="premium-service-card">
+                <img src="{{ url_for('static', filename='images/fintech.svg') }}" class="premium-icon">
+                <h3>Financial Services</h3>
+                <p>
+                    Smart insights, investment tools, and data-driven systems engineered for
+                    real-world financial decisions.
+                </p>
+                <span class="service-hover-label">View details →</span>
 
-        <div class="premium-service-card">
-            <img src="{{ url_for('static', filename='images/innovation.svg') }}" class="premium-icon">
-            <h3>Innovation Lab</h3>
-            <p>Exploring next-gen solutions, automation concepts, and user-focused prototypes for the future.</p>
-        </div>
+            </div>
+        </a>
+
+        <!-- Technology Development -->
+        <a href="/services#technology"
+            class="premium-service-link"
+            data-nav="true"
+            data-service="technology">
+
+            <div class="premium-service-card">
+                <img src="{{ url_for('static', filename='images/tech.svg') }}" class="premium-icon">
+                <h3>Technology Development</h3>
+                <p>
+                    Modern web and software experiences designed with scalability, clarity,
+                    and performance in mind.
+                </p>
+                <span class="service-hover-label">View details →</span>
+
+            </div>
+        </a>
+
+        <!-- Innovation Lab -->
+        <a href="/services#innovation"
+            class="premium-service-link"
+            data-nav="true"
+            data-service="innovation">
+
+            <div class="premium-service-card">
+                <img src="{{ url_for('static', filename='images/innovation.svg') }}" class="premium-icon">
+                <h3>Innovation Lab</h3>
+                <p>
+                    Exploring next-gen solutions, automation concepts, and user-focused
+                    prototypes for the future.
+                </p>
+                <span class="service-hover-label">View details →</span>
+            </div>
+        </a>
 
     </div>
 </section>
 
-
 <div class="section-divider"></div>
-
 
 <!-- WHY CHOOSE US -->
 <section class="why-section fade-in delay-2">

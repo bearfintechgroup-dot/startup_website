@@ -1,0 +1,50 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="visualsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7f5cff"/>
+      <stop offset="100%" stop-color="#5b9dff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Window frame -->
+  <rect x="10" y="12" width="44" height="34" rx="6"
+        fill="rgba(5,1,15,0.65)"
+        stroke="url(#visualsGrad)"
+        stroke-width="2.4"/>
+
+  <!-- Top bar -->
+  <rect x="10" y="12" width="44" height="8" rx="6"
+        fill="rgba(127,92,255,0.35)"/>
+
+  <circle cx="16" cy="16" r="2" fill="#f5f7ff"/>
+  <circle cx="22" cy="16" r="2" fill="#f5f7ff"/>
+  <circle cx="28" cy="16" r="2" fill="#f5f7ff"/>
+
+  <!-- Bars -->
+  <rect x="16" y="30" width="6" height="12" rx="2"
+        fill="#5b9dff"/>
+  <rect x="26" y="26" width="6" height="16" rx="2"
+        fill="#7f5cff"/>
+  <rect x="36" y="22" width="6" height="20" rx="2"
+        fill="#b388ff"/>
+  <rect x="46" y="28" width="6" height="14" rx="2"
+        fill="#8fc5ff"/>
+
+  <!-- Line chart overlay -->
+  <path d="M16 38
+           L24 32
+           L32 28
+           L40 26
+           L50 24"
+        fill="none"
+        stroke="#f5f7ff"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <!-- Bottom axis -->
+  <line x1="14" y1="44" x2="50" y2="44"
+        stroke="rgba(255,255,255,0.25)"
+        stroke-width="1.6"
+        stroke-linecap="round"/>
+</svg>

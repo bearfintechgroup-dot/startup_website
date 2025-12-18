@@ -721,6 +721,65 @@ section p {
     left: 0;
 }
 
+/* Clickable premium service cards */
+.premium-service-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+}
+
+.premium-service-card {
+    cursor: pointer;
+}
+
+/* Premium card press transition */
+.premium-service-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.premium-service-link:active .premium-service-card {
+    transform: scale(0.97);
+}
+
+/* ----------------------------------------
+   SERVICE CARD HOVER MICRO-LABEL
+---------------------------------------- */
+
+.premium-service-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.service-hover-label {
+    position: absolute;
+    bottom: 18px;
+    right: 22px;
+
+    font-size: 14px;
+    font-weight: 600;
+    color: #b388ff;
+
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+}
+
+/* Show on hover */
+.premium-service-link:hover .service-hover-label {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Mobile tap visibility */
+@media (max-width: 768px) {
+    .service-hover-label {
+        opacity: 1;
+        transform: none;
+        font-size: 13px;
+    }
+}
+
 /* ============================================================
    ROADMAP / COMING SOON SECTION
 ============================================================ */
@@ -819,6 +878,89 @@ section p {
         width: 90%;
     }
 }
+
+/* ============================================================
+   TOOLKITS / SOLUTIONS SECTION
+============================================================ */
+
+.toolkits-section {
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.toolkits-title {
+    font-size: 40px;
+    color: #b388ff;
+    margin-bottom: 10px;
+}
+
+.toolkits-subtitle {
+    font-size: 18px;
+    color: #e8e4ff;
+    max-width: 750px;
+    margin: 0 auto 40px;
+}
+
+.toolkits-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.toolkit-card {
+    width: 280px;
+    padding: 28px;
+    border-radius: 18px;
+
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(10px);
+
+    text-align: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    color: #ffffff;
+    text-shadow: 0 0 3px rgba(0,0,0,0.3);
+}
+
+.toolkit-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(127,92,255,0.25);
+}
+
+.toolkit-icon {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 15px;
+
+    filter: drop-shadow(0 0 8px rgba(127, 92, 255, 0.35));
+}
+
+.toolkit-card h3 {
+    font-size: 22px;
+    color: #bfaaff;
+    margin-bottom: 10px;
+}
+
+.toolkit-card p {
+    color: #f0f0ff;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .toolkit-card {
+        width: 90%;
+    }
+
+    .toolkits-title {
+        font-size: 32px;
+    }
+}
+
 
 /* ============================================================
    CONTACT PAGE (PREMIUM TWO-COLUMN)

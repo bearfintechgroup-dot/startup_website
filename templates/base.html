@@ -223,6 +223,25 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const serviceLinks = document.querySelectorAll('[data-service]');
+
+    serviceLinks.forEach(link => {
+        link.addEventListener("click", () => {
+            const service = link.getAttribute("data-service");
+
+            // Console log for now (easy to replace later)
+            console.log("Service clicked:", service);
+
+            // Ready for analytics later:
+            // gtag('event', 'service_click', { service });
+        });
+    });
+});
+</script>
+
+
+<script>
 const hamburger = document.getElementById("hamburger");
 const navLinksMenu = document.getElementById("nav-links");
 
@@ -246,6 +265,37 @@ document.querySelectorAll("#nav-links a").forEach(link => {
 });
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const serviceLinks = document.querySelectorAll(".premium-service-link");
+
+    serviceLinks.forEach(link => {
+        link.addEventListener("click", () => {
+
+            const service = link.dataset.service || "unknown";
+            const timestamp = new Date().toISOString();
+
+            const existing = JSON.parse(
+                localStorage.getItem("bearfintech_clicks") || "[]"
+            );
+
+            existing.push({
+                service,
+                time: timestamp
+            });
+
+            localStorage.setItem(
+                "bearfintech_clicks",
+                JSON.stringify(existing)
+            );
+
+            console.log("Service click logged:", service);
+        });
+    });
+
+});
+</script>
 
 </body>
 </html>
