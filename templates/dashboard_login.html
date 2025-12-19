@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="contact-hero">
+    <h1>Dashboard Access</h1>
+    <p>Authorized access only</p>
+</section>
+
+<section class="contact-wrapper">
+    <div class="contact-form-container">
+        <form method="POST">
+            <div class="form-group">
+                <label>Access Key</label>
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Enter dashboard access key"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="cta-button">
+                Enter Dashboard
+            </button>
+        </form>
+    </div>
+</section>
+{% endblock %}

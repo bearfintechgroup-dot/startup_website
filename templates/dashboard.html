@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="dashboard-hero">
+    <h1>Market Analytics Dashboard</h1>
+    <p>Live market signals powered by Bear Fintech analytics.</p>
+</section>
+
+<div class="dash-controls">
+  <button class="dash-btn" data-period="5d">1W</button>
+  <button class="dash-btn" data-period="1mo">1M</button>
+  <button class="dash-btn" data-period="6mo">6M</button>
+  <button class="dash-btn active" data-period="3mo">3M</button>
+</div>
+
+<section class="dashboard-grid" id="dashboardGrid">
+    <!-- Cards injected here -->
+</section>
+
+<div id="chartModal" class="chart-modal">
+  <div class="chart-box">
+    <button id="chartClose" class="chart-close">×</button>
+    <h3 id="chartTitle"></h3>
+    <canvas id="priceChart"></canvas>
+  </div>
+</div>
+<!-- TIME FRAME BUTTONS -->
+<script>
+let currentPeriod = "3mo";
+
+function loadDashboard() {
+  fetch(`/api/market?period=${encodeURIComponent(currentPeriod)}`)
+    .then(r => r.json())
+    .then(data => {
+      const grid = document.getElementById("dashboardGrid");
+      grid.innerHTML = "";
+
+      Object.entries(data).forEach(([symbol, info]) => {
+        const trendClass = info.trend === "Bullish" ? "is-bull" : "is-bear";
+
+        const card = document.createElement("div");
+        card.className = `dashboard-card ${trendClass}`;
+        card.innerHTML = `
+            <div class="dash-top">
+                <h3>${symbol}</h3>
+                <span class="dash-pill ${trendClass}">
+                    ${info.trend === "Bullish" ? "▲ Bullish" : "▼ Bearish"}
+                </span>
+            </div>
+
+            <div class="metric">
+                <span class="dash-muted">Price</span>
+                <strong>$${info.price}</strong>
+            </div>
+
+            <div class="metric">
+                <span class="dash-muted">Momentum</span>
+                <strong>${info.momentum}</strong>
+            </div>
+
+            <div class="metric">
+                <span class="dash-muted">Volatility</span>
+                <strong>${info.volatility}</strong>
+            </div>
+
+            <div class="view-details">View details →</div>
+          `;
+
+        grid.appendChild(card);
+      });
+    });
+}
+</script>
+
+<script>
+document.querySelectorAll(".dash-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".dash-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    currentPeriod = btn.dataset.period;
+    loadDashboard();
+  });
+});
+
+loadDashboard(); // initial load
+</script>
+
+
+
+<script>
+let chart;
+
+function openChart(symbol) {
+  const modal = document.getElementById("chartModal");
+  const title = document.getElementById("chartTitle");
+  title.textContent = `${symbol} — Price & Moving Averages`;
+
+  fetch(`/api/series/${symbol}?period=${encodeURIComponent(currentPeriod)}`)
+    .then(r => r.json())
+    .then(series => {
+      const ctx = document.getElementById("priceChart");
+
+      if (chart) chart.destroy();
+
+      chart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: series.labels,
+          datasets: [
+            { label: "Close", data: series.close, borderWidth: 2, pointRadius: 0 },
+            { label: "MA10",  data: series.ma10,  borderWidth: 2, pointRadius: 0 },
+            { label: "MA30",  data: series.ma30,  borderWidth: 2, pointRadius: 0 }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { labels: { color: "#fff" } } },
+          scales: {
+            x: { ticks: { color: "#ddd" }, grid: { color: "rgba(255,255,255,0.06)" } },
+            y: { ticks: { color: "#ddd" }, grid: { color: "rgba(255,255,255,0.06)" } }
+          }
+        }
+      });
+
+      modal.classList.add("open");
+    });
+}
+
+document.addEventListener("click", (e) => {
+  const card = e.target.closest(".dashboard-card");
+  if (!card) return;
+  const symbol = card.querySelector("h3")?.textContent?.trim();
+  if (symbol) openChart(symbol);
+});
+
+document.getElementById("chartClose").addEventListener("click", () => {
+  document.getElementById("chartModal").classList.remove("open");
+});
+document.getElementById("chartModal").addEventListener("click", (e) => {
+  if (e.target.id === "chartModal") e.currentTarget.classList.remove("open");
+});
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+{% endblock %}

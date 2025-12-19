@@ -5,6 +5,13 @@ from dotenv import load_dotenv
 import os
 import traceback
 from datetime import datetime
+from analytics.market import fetch_market_data
+from analytics.engine import analyze_market
+from flask import jsonify
+import pandas as pd
+from flask import session, redirect
+
+
 # -----------------------------------------
 # Load environment variables
 # -----------------------------------------
@@ -59,6 +66,77 @@ def send_async_email(app, msg):
 def home():
     return render_template("index.html", active_page="home")
 
+def dashboard_required(fn):
+    def wrapper(*args, **kwargs):
+        if not session.get("dashboard_auth"):
+            return redirect(url_for("dashboard_login"))
+        return fn(*args, **kwargs)
+    wrapper.__name__ = fn.__name__
+    return wrapper
+
+@app.route("/dashboard/login", methods=["GET", "POST"])
+def dashboard_login():
+    if request.method == "POST":
+        pw = request.form.get("password", "")
+        if pw and pw == os.getenv("DASHBOARD_PASSWORD"):
+            session["dashboard_auth"] = True
+            return redirect("/dashboard")
+        return render_template("dashboard_login.html", error="Invalid password.")
+    return render_template("dashboard_login.html")
+
+@app.route("/dashboard/logout")
+def dashboard_logout():
+    session.pop("dashboard_auth", None)
+    return redirect("/")
+
+@app.route("/dashboard")
+@dashboard_required
+def dashboard():
+    market_data = fetch_market_data() # from analytics.market
+    results = analyze_market(market_data)
+
+    return render_template(
+        "dashboard.html",
+        results=results
+    )
+
+
+@app.route("/api/market")
+@dashboard_required
+def market_api():
+    period = request.args.get("period", "3mo")  # e.g. 5d, 1mo, 6mo, 1y
+    market_data = fetch_market_data(period=period)
+    results = analyze_market(market_data)
+    return jsonify(results)
+
+@app.route("/api/series/<symbol>")
+def series_api(symbol):
+    period = request.args.get("period", "3mo")
+    df = fetch_market_data(symbols=[symbol], period=period).get(symbol)
+
+    if df is None or df.empty:
+        return jsonify({"error": "No data"}), 404
+
+    close = df["Close"]
+    if isinstance(close, pd.DataFrame):
+        close = close.iloc[:, 0]
+    close = close.dropna()
+
+    ma10 = close.rolling(10).mean()
+    ma30 = close.rolling(30).mean()
+
+    # Keep last ~120 points for speed
+    close = close.tail(120)
+    ma10  = ma10.tail(120)
+    ma30  = ma30.tail(120)
+
+    labels = [d.strftime("%Y-%m-%d") for d in close.index]
+    return jsonify({
+        "labels": labels,
+        "close": [float(x) if x == x else None for x in close.values],
+        "ma10":  [float(x) if x == x else None for x in ma10.values],
+        "ma30":  [float(x) if x == x else None for x in ma30.values],
+    })
 
 @app.route("/about")
 def about():
@@ -117,6 +195,7 @@ def contact():
         return redirect("/contact")
 
     return render_template("contact.html", active_page="contact")
+
 
 # ----------------------------
 # Custom Error Pages
