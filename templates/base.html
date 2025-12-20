@@ -2,15 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>BEAR FINTECH GROUP</title>
 
-    <!-- Stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
-    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/bear_logo.svg') }}">
 </head>
 
@@ -21,10 +16,9 @@
     <div id="particles-js"></div>
 </div>
 
-<!-- Subtle dark overlay -->
 <div class="hero-overlay"></div>
 
-<!-- FULLSCREEN PAGE LOADER -->
+<!-- PAGE LOADER -->
 <div id="page-loader">
     <div class="loader-glass">
         <img src="{{ url_for('static', filename='images/bear_logo.svg') }}" class="loader-logo" alt="Bear Logo">
@@ -33,63 +27,36 @@
     </div>
 </div>
 
-<!-- NAVIGATION BAR -->
+<!-- NAVBAR -->
 <nav class="navbar">
     <div class="nav-left">
         <img src="{{ url_for('static', filename='images/bear_logo.svg') }}" class="nav-logo" alt="Bear Logo">
         <span class="brand-name">BEAR FINTECH GROUP</span>
     </div>
 
-<!-- HAMBURGER ICON (MOBILE) -->
     <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
     </div>
 
-<!-- NAV LINKS -->
-<div class="nav-links" id="nav-links">
-    <a href="/" data-nav="true"
-       class="{% if active_page == 'home' %}active-nav{% endif %}">
-        Home
-    </a>
-
-    <a href="/about" data-nav="true"
-       class="{% if active_page == 'about' %}active-nav{% endif %}">
-        About
-    </a>
-
-    <a href="/services" data-nav="true"
-       class="{% if active_page == 'services' %}active-nav{% endif %}">
-        Services
-    </a>
-
-    <a href="/contact" data-nav="true"
-       class="{% if active_page == 'contact' %}active-nav{% endif %}">
-        Contact
-    </a>
-
-    <a href="/dashboard" data-nav="true">Dashboard</a>
-
-</div>
-
+    <div class="nav-links" id="nav-links">
+        <a href="/" data-nav="true" class="{% if active_page=='home' %}active-nav{% endif %}">Home</a>
+        <a href="/about" data-nav="true" class="{% if active_page=='about' %}active-nav{% endif %}">About</a>
+        <a href="/services" data-nav="true" class="{% if active_page=='services' %}active-nav{% endif %}">Services</a>
+        <a href="/contact" data-nav="true" class="{% if active_page=='contact' %}active-nav{% endif %}">Contact</a>
+        <a href="/dashboard" data-nav="true">Dashboard</a>
+    </div>
 </nav>
 
-<!-- MAIN PAGE CONTENT -->
 {% block content %}{% endblock %}
 
-<!-- ======================================================
-     FOOTER
-====================================================== -->
+<!-- FOOTER -->
 <footer class="footer">
     <div class="footer-content">
-
         <div class="footer-col">
             <img src="{{ url_for('static', filename='images/bear_logo.svg') }}" class="footer-logo">
             <h3>BEAR FINTECH GROUP</h3>
-            <p>Where finance meets innovation. Tools and systems engineered for real-world impact.</p>
+            <p>Where finance meets innovation.</p>
         </div>
-
         <div class="footer-col">
             <h4>Explore</h4>
             <a href="/">Home</a>
@@ -97,208 +64,92 @@
             <a href="/services">Services</a>
             <a href="/contact">Contact</a>
         </div>
-
         <div class="footer-col">
             <h4>Contact</h4>
             <p>Calgary, Alberta</p>
             <p>bearfintechgroup@gmail.com</p>
         </div>
-
     </div>
-
     <div class="footer-bottom">
         <p>© {{ now().year }} Bear Fintech Group — All Rights Reserved.</p>
     </div>
 </footer>
 
-
-
-<!-- ======================================================
-     PARTICLES.JS
-====================================================== -->
+<!-- LIBRARIES -->
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script src="{{ url_for('static', filename='js/particles-config.js') }}"></script>
 
-
-<!-- ======================================================
-     FADE-IN ANIMATION (IntersectionObserver)
-====================================================== -->
+<!-- CORE APP SCRIPT -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    const animatedItems = document.querySelectorAll(".fade-in, .fade-rise");
 
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("appear");
-            }
+    /* --------------------------------
+       PAGE LOADER
+    -------------------------------- */
+    const loader = document.getElementById("page-loader");
+    setTimeout(() => loader?.classList.add("loader-hidden"), 300);
+
+    document.querySelectorAll('a[data-nav="true"]').forEach(link => {
+        link.addEventListener("click", e => {
+            const href = link.getAttribute("href");
+            if (!href || href.startsWith("#")) return;
+            e.preventDefault();
+            loader?.classList.remove("loader-hidden");
+            setTimeout(() => window.location.href = href, 200);
         });
-    }, { threshold: 0.15 });
+    });
 
-    animatedItems.forEach(el => observer.observe(el));
-});
-</script>
+    /* --------------------------------
+       HAMBURGER MENU
+    -------------------------------- */
 
 
-
-<!-- ======================================================
-     NAVBAR SCROLL EFFECT
-====================================================== -->
-<script>
-window.addEventListener("scroll", () => {
+    /* --------------------------------
+       SCROLL EFFECTS
+    -------------------------------- */
     const navbar = document.querySelector(".navbar");
-    navbar.classList.toggle("scrolled", window.scrollY > 20);
-});
-</script>
-
-
-<!-- ======================================================
-     SHOW PARTICLES AFTER HERO SECTION
-====================================================== -->
-<script>
-document.addEventListener("scroll", () => {
     const hero = document.querySelector(".hero-image");
-    if (!hero) return;
-
-    const heroHeight = hero.offsetHeight;
     const particles = document.getElementById("particles-wrapper");
 
-    if (window.scrollY < heroHeight - 50) {
-        particles.classList.add("hidden");
-    } else {
-        particles.classList.remove("hidden");
-    }
-});
-</script>
+    window.addEventListener("scroll", () => {
+        navbar?.classList.toggle("scrolled", window.scrollY > 20);
 
-
-<!-- ======================================================
-     PARALLAX SIMULATION
-====================================================== -->
-<script>
-window.addEventListener("scroll", () => {
-    const hero = document.querySelector(".hero-image");
-    if (!hero) return;
-
-    const scrollY = window.scrollY;
-    hero.style.backgroundPosition = `center ${scrollY * 0.4}px`;
-});
-</script>
-
-
-<!-- ======================================================
-     FULLSCREEN LOADER LOGIC
-====================================================== -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const loader = document.getElementById("page-loader");
-
-    // Hide loader once page is ready
-    if (loader) {
-        setTimeout(() => {
-            loader.classList.add("loader-hidden");
-        }, 300); // short delay for nicer effect
-    }
-
-    // Show loader on internal navigation clicks
-    const navLinks = document.querySelectorAll('a[data-nav="true"]');
-
-    navLinks.forEach(link => {
-        link.addEventListener("click", (e) => {
-            const href = link.getAttribute("href");
-
-            // Ignore empty or hash links
-            if (!href || href.startsWith("#")) return;
-
-            e.preventDefault();
-
-            if (loader) {
-                loader.classList.remove("loader-hidden");
-            }
-
-            // Slight delay before navigating so animation is visible
-            setTimeout(() => {
-                window.location.href = href;
-            }, 200);
-        });
+        if (hero && particles) {
+            particles.classList.toggle(
+                "hidden",
+                window.scrollY < hero.offsetHeight - 50
+            );
+            hero.style.backgroundPosition = `center ${window.scrollY * 0.4}px`;
+        }
     });
-});
-</script>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const serviceLinks = document.querySelectorAll('[data-service]');
+    /* --------------------------------
+       FADE-IN OBSERVER
+    -------------------------------- */
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => e.isIntersecting && e.target.classList.add("appear"));
+    }, { threshold: 0.15 });
 
-    serviceLinks.forEach(link => {
+    document.querySelectorAll(".fade-in, .fade-rise")
+        .forEach(el => observer.observe(el));
+
+    /* --------------------------------
+       SERVICE CLICK ANALYTICS
+    -------------------------------- */
+    document.querySelectorAll(".premium-service-link").forEach(link => {
         link.addEventListener("click", () => {
-            const service = link.getAttribute("data-service");
-
-            // Console log for now (easy to replace later)
-            console.log("Service clicked:", service);
-
-            // Ready for analytics later:
-            // gtag('event', 'service_click', { service });
-        });
-    });
-});
-</script>
-
-
-<script>
-const hamburger = document.getElementById("hamburger");
-const navLinksMenu = document.getElementById("nav-links");
-
-// Toggle menu open/close
-hamburger.addEventListener("click", () => {
-    hamburger.classList.toggle("active");
-    navLinksMenu.classList.toggle("open");
-});
-</script>
-
-<script>
-// Auto-close hamburger menu when a nav link is clicked (mobile UX fix)
-document.querySelectorAll("#nav-links a").forEach(link => {
-    link.addEventListener("click", () => {
-        const hamburger = document.getElementById("hamburger");
-        const navLinksMenu = document.getElementById("nav-links");
-
-        hamburger.classList.remove("active");
-        navLinksMenu.classList.remove("open");
-    });
-});
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-
-    const serviceLinks = document.querySelectorAll(".premium-service-link");
-
-    serviceLinks.forEach(link => {
-        link.addEventListener("click", () => {
-
             const service = link.dataset.service || "unknown";
-            const timestamp = new Date().toISOString();
-
-            const existing = JSON.parse(
-                localStorage.getItem("bearfintech_clicks") || "[]"
-            );
-
-            existing.push({
-                service,
-                time: timestamp
-            });
-
-            localStorage.setItem(
-                "bearfintech_clicks",
-                JSON.stringify(existing)
-            );
-
+            const clicks = JSON.parse(localStorage.getItem("bearfintech_clicks") || "[]");
+            clicks.push({ service, time: new Date().toISOString() });
+            localStorage.setItem("bearfintech_clicks", JSON.stringify(clicks));
             console.log("Service click logged:", service);
         });
     });
 
 });
 </script>
+
+<script src="{{ url_for('static', filename='js/base.js') }}"></cript>
 
 </body>
 </html>

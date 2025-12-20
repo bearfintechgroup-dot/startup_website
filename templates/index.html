@@ -1,9 +1,12 @@
 {% extends "base.html" %}
-
 {% block content %}
 
-<!-- HERO SECTION -->
-<section class="hero-image">
+<main>
+
+<!-- =========================
+     HERO
+========================= -->
+<header class="hero-image">
     <div class="hero-content fade-in">
         <h1 class="hero-title">
             Empowering Finance & Technology<br>
@@ -20,13 +23,13 @@
             <a href="/about" class="hero-button-outline">Our Vision</a>
         </div>
     </div>
-</section>
-
+</header>
 
 <div class="section-divider"></div>
 
-
-<!-- ABOUT SECTION -->
+<!-- =========================
+     ABOUT
+========================= -->
 <section class="about-section fade-in delay-1">
     <h2>Innovating Finance & Technology</h2>
     <p>
@@ -38,8 +41,9 @@
 
 <div class="section-divider"></div>
 
-
-<!-- SERVICES SECTION -->
+<!-- =========================
+     CORE SERVICES
+========================= -->
 <section class="services-section fade-in">
     <h2>Our Core Services</h2>
     <p class="services-tagline">
@@ -48,57 +52,70 @@
 
     <div class="premium-services-grid">
 
-        <!-- Financial Services -->
+        <!-- Financial -->
         <a href="/services#financial"
-            class="premium-service-link"
-            data-nav="true"
-            data-service="financial">
+           class="premium-service-link"
+           data-nav="true"
+           data-service="financial"
+           aria-label="View Financial Services">
 
-            <div class="premium-service-card">
-                <img src="{{ url_for('static', filename='images/fintech.svg') }}" class="premium-icon">
+            <article class="premium-service-card">
+                <img src="{{ url_for('static', filename='images/fintech.svg') }}"
+                     class="premium-icon"
+                     alt="Financial Services Icon">
+
                 <h3>Financial Services</h3>
                 <p>
                     Smart insights, investment tools, and data-driven systems engineered for
                     real-world financial decisions.
                 </p>
-                <span class="service-hover-label">View details →</span>
 
-            </div>
+                <span class="service-hover-label">View details →</span>
+            </article>
         </a>
 
-        <!-- Technology Development -->
+        <!-- Technology -->
         <a href="/services#technology"
-            class="premium-service-link"
-            data-nav="true"
-            data-service="technology">
+           class="premium-service-link"
+           data-nav="true"
+           data-service="technology"
+           aria-label="View Technology Development">
 
-            <div class="premium-service-card">
-                <img src="{{ url_for('static', filename='images/tech.svg') }}" class="premium-icon">
+            <article class="premium-service-card">
+                <img src="{{ url_for('static', filename='images/tech.svg') }}"
+                     class="premium-icon"
+                     alt="Technology Development Icon">
+
                 <h3>Technology Development</h3>
                 <p>
                     Modern web and software experiences designed with scalability, clarity,
                     and performance in mind.
                 </p>
-                <span class="service-hover-label">View details →</span>
 
-            </div>
+                <span class="service-hover-label">View details →</span>
+            </article>
         </a>
 
-        <!-- Innovation Lab -->
+        <!-- Innovation -->
         <a href="/services#innovation"
-            class="premium-service-link"
-            data-nav="true"
-            data-service="innovation">
+           class="premium-service-link"
+           data-nav="true"
+           data-service="innovation"
+           aria-label="View Innovation Lab">
 
-            <div class="premium-service-card">
-                <img src="{{ url_for('static', filename='images/innovation.svg') }}" class="premium-icon">
+            <article class="premium-service-card">
+                <img src="{{ url_for('static', filename='images/innovation.svg') }}"
+                     class="premium-icon"
+                     alt="Innovation Lab Icon">
+
                 <h3>Innovation Lab</h3>
                 <p>
                     Exploring next-gen solutions, automation concepts, and user-focused
                     prototypes for the future.
                 </p>
+
                 <span class="service-hover-label">View details →</span>
-            </div>
+            </article>
         </a>
 
     </div>
@@ -106,32 +123,37 @@
 
 <div class="section-divider"></div>
 
-<!-- WHY CHOOSE US -->
+<!-- =========================
+     WHY US
+========================= -->
 <section class="why-section fade-in delay-2">
     <h2>Why Choose Us</h2>
 
     <div class="why-grid">
 
-        <div class="why-item fade-in delay-1">
+        <article class="why-item fade-in delay-1">
             <h4>Future-Focused</h4>
             <p>We build long-term solutions designed for tomorrow’s digital world.</p>
-        </div>
+        </article>
 
-        <div class="why-item fade-in delay-2">
+        <article class="why-item fade-in delay-2">
             <h4>Engineering Excellence</h4>
             <p>Clean, scalable, reliable code behind every product we deliver.</p>
-        </div>
+        </article>
 
-        <div class="why-item fade-in delay-3">
+        <article class="why-item fade-in delay-3">
             <h4>Accessible Design</h4>
             <p>Technology crafted to feel intuitive, meaningful, and seamless to use.</p>
-        </div>
+        </article>
 
     </div>
 </section>
 
 <div class="section-divider"></div>
 
+<!-- =========================
+     ROADMAP
+========================= -->
 <section class="roadmap-section fade-in">
     <h2>Roadmap & Coming Soon</h2>
     <p class="roadmap-intro">
@@ -141,51 +163,42 @@
 
     <div class="roadmap-grid">
 
-        <div class="roadmap-card">
+        <article class="roadmap-card">
             <h3>Market Analytics Dashboard</h3>
-            <p>
-                A clean, user-friendly dashboard offering real-time insights, risk metrics,
-                and simplified market trends for everyday investors.
-            </p>
+            <p>Real-time insights, risk metrics, and simplified market trends.</p>
             <span class="roadmap-tag in-progress">In Development</span>
-        </div>
+        </article>
 
-        <div class="roadmap-card">
+        <article class="roadmap-card">
             <h3>Automation Toolkit</h3>
-            <p>
-                A collection of smart automation tools designed to save time, improve accuracy,
-                and streamline workflows for individuals and small businesses.
-            </p>
+            <p>Smart automation tools to streamline workflows and save time.</p>
             <span class="roadmap-tag planned">Planned</span>
-        </div>
+        </article>
 
-        <div class="roadmap-card">
+        <article class="roadmap-card">
             <h3>Investment Insights App</h3>
-            <p>
-                A lightweight app providing easy-to-understand financial insights,
-                personalized suggestions, and investor education resources.
-            </p>
+            <p>Clear financial insights and investor education in a lightweight app.</p>
             <span class="roadmap-tag concept">Concept Stage</span>
-        </div>
+        </article>
 
-        <div class="roadmap-card">
+        <article class="roadmap-card">
             <h3>Client Portal</h3>
-            <p>
-                A secure, long-term platform for clients to access tools, track activity,
-                and collaborate with Bear Fintech services in a seamless environment.
-            </p>
+            <p>A secure platform for clients to access tools and collaborate.</p>
             <span class="roadmap-tag long-term">Long-Term</span>
-        </div>
+        </article>
 
     </div>
 </section>
 
-
-<!-- CALL TO ACTION -->
+<!-- =========================
+     CTA
+========================= -->
 <section class="cta-section fade-in delay-3">
     <h2>Ready to Build the Future?</h2>
-    <p>Your ideas deserve powerful execution. Let’s engineer the next generation of digital solutions.</p>
+    <p>Your ideas deserve powerful execution.</p>
     <a href="/contact" class="cta-button">Start Your Project</a>
 </section>
+
+</main>
 
 {% endblock %}

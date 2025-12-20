@@ -6,6 +6,7 @@
     <p>Live market signals powered by Bear Fintech analytics.</p>
 </section>
 
+<!-- TIME CONTROLS -->
 <div class="dash-controls">
   <button class="dash-btn" data-period="5d">1W</button>
   <button class="dash-btn" data-period="1mo">1M</button>
@@ -13,10 +14,10 @@
   <button class="dash-btn active" data-period="3mo">3M</button>
 </div>
 
-<section class="dashboard-grid" id="dashboardGrid">
-    <!-- Cards injected here -->
-</section>
+<!-- DASHBOARD GRID -->
+<section class="dashboard-grid" id="dashboardGrid"></section>
 
+<!-- CHART MODAL -->
 <div id="chartModal" class="chart-modal">
   <div class="chart-box">
     <button id="chartClose" class="chart-close">×</button>
@@ -24,92 +25,99 @@
     <canvas id="priceChart"></canvas>
   </div>
 </div>
-<!-- TIME FRAME BUTTONS -->
-<script>
-let currentPeriod = "3mo";
 
-function loadDashboard() {
-  fetch(`/api/market?period=${encodeURIComponent(currentPeriod)}`)
-    .then(r => r.json())
-    .then(data => {
-      const grid = document.getElementById("dashboardGrid");
-      grid.innerHTML = "";
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+(() => {
+  // -----------------------------
+  // STATE
+  // -----------------------------
+  let currentPeriod = "3mo";
+  let activeChart = null;
+
+  const grid = document.getElementById("dashboardGrid");
+  const modal = document.getElementById("chartModal");
+  const chartTitle = document.getElementById("chartTitle");
+  const chartCanvas = document.getElementById("priceChart");
+
+  // -----------------------------
+  // API HELPERS
+  // -----------------------------
+  async function fetchJSON(url) {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`API error: ${res.status}`);
+    return res.json();
+  }
+
+  // -----------------------------
+  // DASHBOARD RENDER
+  // -----------------------------
+  async function loadDashboard() {
+    grid.innerHTML = "";
+
+    try {
+      const data = await fetchJSON(`/api/market?period=${encodeURIComponent(currentPeriod)}`);
 
       Object.entries(data).forEach(([symbol, info]) => {
         const trendClass = info.trend === "Bullish" ? "is-bull" : "is-bear";
 
         const card = document.createElement("div");
         card.className = `dashboard-card ${trendClass}`;
+        card.dataset.symbol = symbol;
+
         card.innerHTML = `
-            <div class="dash-top">
-                <h3>${symbol}</h3>
-                <span class="dash-pill ${trendClass}">
-                    ${info.trend === "Bullish" ? "▲ Bullish" : "▼ Bearish"}
-                </span>
-            </div>
+          <div class="dash-top">
+            <h3>${symbol}</h3>
+            <span class="dash-pill">${info.signal || info.trend}</span>
+          </div>
 
-            <div class="metric">
-                <span class="dash-muted">Price</span>
-                <strong>$${info.price}</strong>
-            </div>
+          <div class="metric">
+            <span class="dash-muted">Price</span>
+            <strong>$${info.price}</strong>
+          </div>
 
-            <div class="metric">
-                <span class="dash-muted">Momentum</span>
-                <strong>${info.momentum}</strong>
-            </div>
+          <div class="metric">
+            <span class="dash-muted">Momentum</span>
+            <strong>${info.momentum}</strong>
+          </div>
 
-            <div class="metric">
-                <span class="dash-muted">Volatility</span>
-                <strong>${info.volatility}</strong>
-            </div>
+          <div class="metric">
+            <span class="dash-muted">Volatility</span>
+            <strong>${info.volatility}</strong>
+          </div>
 
-            <div class="view-details">View details →</div>
-          `;
+          <div class="view-details">View details →</div>
+        `;
 
         grid.appendChild(card);
       });
-    });
-}
-</script>
 
-<script>
-document.querySelectorAll(".dash-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".dash-btn").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    currentPeriod = btn.dataset.period;
-    loadDashboard();
-  });
-});
+    } catch (err) {
+      grid.innerHTML = `<p class="dash-error">Failed to load market data.</p>`;
+      console.error(err);
+    }
+  }
 
-loadDashboard(); // initial load
-</script>
+  // -----------------------------
+  // CHART MODAL
+  // -----------------------------
+  async function openChart(symbol) {
+    try {
+      const series = await fetchJSON(
+        `/api/series/${symbol}?period=${encodeURIComponent(currentPeriod)}`
+      );
 
+      if (activeChart) activeChart.destroy();
 
-
-<script>
-let chart;
-
-function openChart(symbol) {
-  const modal = document.getElementById("chartModal");
-  const title = document.getElementById("chartTitle");
-  title.textContent = `${symbol} — Price & Moving Averages`;
-
-  fetch(`/api/series/${symbol}?period=${encodeURIComponent(currentPeriod)}`)
-    .then(r => r.json())
-    .then(series => {
-      const ctx = document.getElementById("priceChart");
-
-      if (chart) chart.destroy();
-
-      chart = new Chart(ctx, {
+      activeChart = new Chart(chartCanvas, {
         type: "line",
         data: {
           labels: series.labels,
           datasets: [
             { label: "Close", data: series.close, borderWidth: 2, pointRadius: 0 },
-            { label: "MA10",  data: series.ma10,  borderWidth: 2, pointRadius: 0 },
-            { label: "MA30",  data: series.ma30,  borderWidth: 2, pointRadius: 0 }
+            { label: "MA10", data: series.ma10, borderWidth: 2, pointRadius: 0 },
+            { label: "MA30", data: series.ma30, borderWidth: 2, pointRadius: 0 }
           ]
         },
         options: {
@@ -123,26 +131,39 @@ function openChart(symbol) {
         }
       });
 
+      chartTitle.textContent = `${symbol} — Price & Moving Averages`;
       modal.classList.add("open");
-    });
-}
 
-document.addEventListener("click", (e) => {
-  const card = e.target.closest(".dashboard-card");
-  if (!card) return;
-  const symbol = card.querySelector("h3")?.textContent?.trim();
-  if (symbol) openChart(symbol);
-});
+    } catch (err) {
+      console.error("Chart load failed", err);
+    }
+  }
 
-document.getElementById("chartClose").addEventListener("click", () => {
-  document.getElementById("chartModal").classList.remove("open");
-});
-document.getElementById("chartModal").addEventListener("click", (e) => {
-  if (e.target.id === "chartModal") e.currentTarget.classList.remove("open");
-});
+  // -----------------------------
+  // EVENTS
+  // -----------------------------
+  document.addEventListener("click", (e) => {
+    const card = e.target.closest(".dashboard-card");
+    if (card?.dataset.symbol) openChart(card.dataset.symbol);
+  });
+
+  document.getElementById("chartClose").onclick = () => modal.classList.remove("open");
+  modal.onclick = (e) => e.target === modal && modal.classList.remove("open");
+
+  document.querySelectorAll(".dash-btn").forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll(".dash-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentPeriod = btn.dataset.period;
+      loadDashboard();
+    };
+  });
+
+  // -----------------------------
+  // INIT
+  // -----------------------------
+  loadDashboard();
+})();
 </script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 {% endblock %}
