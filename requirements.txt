@@ -6,7 +6,7 @@ gunicorn>=21.2
 pandas>=2.2
 numpy>=1.26
 
-Uncomment if used in analytics
+
 yfinance>=0.2
 requests>=2.31
 
