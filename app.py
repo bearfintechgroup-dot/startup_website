@@ -44,6 +44,9 @@ app.config.update(
     MAIL_USE_TLS=True,
     MAIL_USERNAME=os.getenv("MAIL_USERNAME"),
     MAIL_PASSWORD=os.getenv("MAIL_PASSWORD"),
+    SESSION_COOKIE_SECURE=True,      # REQUIRED on HTTPS (Render, production)
+    SESSION_COOKIE_SAMESITE="Lax",    # Mobile-safe default
+    SESSION_COOKIE_HTTPONLY=True,
 )
 
 mail = Mail(app)
