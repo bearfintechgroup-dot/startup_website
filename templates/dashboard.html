@@ -6,13 +6,23 @@
     <p>Live market signals powered by Bear Fintech analytics.</p>
 </section>
 
+<div id="marketRegime" class="market-regime"></div>
+
 <!-- TIME CONTROLS -->
 <div class="dash-controls">
   <button class="dash-btn" data-period="5d">1W</button>
   <button class="dash-btn" data-period="1mo">1M</button>
-  <button class="dash-btn" data-period="6mo">6M</button>
   <button class="dash-btn active" data-period="3mo">3M</button>
+  <button class="dash-btn" data-period="6mo">6M</button>
 </div>
+
+<!-- SORT CONTROLS -->
+<div class="dash-sort">
+  <button data-sort="return">Return</button>
+  <button data-sort="strength">Strength</button>
+  <button data-sort="volatility">Volatility</button>
+</div>
+
 
 <!-- DASHBOARD GRID -->
 <section class="dashboard-grid" id="dashboardGrid"></section>
@@ -27,9 +37,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
-
-
-
+<script defer src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 
 {% endblock %}

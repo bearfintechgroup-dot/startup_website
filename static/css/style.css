@@ -1270,6 +1270,62 @@ section p {
   color: #ffd45f;
 }
 
+.market-regime {
+  max-width: 1100px;
+  margin: 20px auto 10px;
+  padding: 18px 22px;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.market-regime.risk-on {
+  background: rgba(0,255,140,0.12);
+  color: #7fff9a;
+}
+
+.market-regime.risk-off {
+  background: rgba(255,80,80,0.12);
+  color: #ff9b9b;
+}
+
+.market-regime.transitional {
+  background: rgba(255,200,80,0.12);
+  color: #ffd45f;
+}
+.strength-bar {
+  width: 100%;
+  height: 8px;
+  margin-top: 6px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.strength-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ff5f5f, #ffd45f, #7fff9a);
+}
+
+.dash-sort {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.dash-sort button {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
 /* ============================================================
    PREMIUM GLASS FOOTER
 ============================================================ */
@@ -1803,4 +1859,39 @@ h1, h2, h3, h4 {
 .fade-rise.appear {
     opacity: 1;
     transform: translateY(0);
+}
+/* ============================================================
+   FIX: Prevent global overlays from blocking dashboard clicks
+============================================================ */
+
+#particles-wrapper,
+#particles-js,
+.hero-overlay {
+    pointer-events: none !important;
+}
+#page-loader {
+    pointer-events: none;
+}
+
+/* ============================================================
+   CRITICAL FIX: Ensure dashboard receives pointer events
+============================================================ */
+
+.dashboard-hero,
+.dash-controls,
+.dashboard-grid,
+.dashboard-card,
+.chart-modal,
+.chart-box {
+    pointer-events: auto !important;
+}
+
+body {
+    pointer-events: auto;
+}
+.dashboard-hero,
+.dash-controls,
+.dashboard-grid {
+    position: relative;
+    z-index: 10;
 }

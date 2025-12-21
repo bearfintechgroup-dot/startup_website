@@ -18,7 +18,8 @@ import pandas as pd
 # Internal Analytics
 # ============================================================
 from analytics.market import fetch_market_data
-from analytics.engine import analyze_market
+from analytics.engine import analyze_market, compute_market_regime
+
 
 # ============================================================
 # Environment Setup
@@ -108,7 +109,7 @@ def dashboard_logout():
 @dashboard_required
 def dashboard():
     market_data = fetch_market_data()
-    results = analyze_market(market_data)
+    results = analyze_market(market_data, "3mo")
     return render_template("dashboard.html", results=results)
 
 # -------------------------
@@ -119,8 +120,14 @@ def dashboard():
 def market_api():
     period = request.args.get("period", "3mo")
     market_data = fetch_market_data(period=period)
-    results = analyze_market(market_data)
-    return jsonify(results)
+    results = analyze_market(market_data, period)
+    regime = compute_market_regime(results)
+
+    return jsonify({
+        "assets": results,
+        "regime": regime
+    })
+
 
 @app.route("/api/series/<symbol>")
 @dashboard_required
@@ -136,19 +143,28 @@ def series_api(symbol):
         close = close.iloc[:, 0]
 
     close = close.dropna()
+
     ma10 = close.rolling(10).mean()
     ma30 = close.rolling(30).mean()
 
+    # Limit series length
     close = close.tail(120)
     ma10 = ma10.tail(120)
     ma30 = ma30.tail(120)
 
+    def safe_list(series):
+        return [
+            None if pd.isna(x) else round(float(x), 2)
+            for x in series
+        ]
+
     return jsonify({
         "labels": [d.strftime("%Y-%m-%d") for d in close.index],
-        "close": close.round(2).tolist(),
-        "ma10": ma10.round(2).tolist(),
-        "ma30": ma30.round(2).tolist(),
+        "close": safe_list(close),
+        "ma10": safe_list(ma10),
+        "ma30": safe_list(ma30),
     })
+
 
 # -------------------------
 # Static Pages
