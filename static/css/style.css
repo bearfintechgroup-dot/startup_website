@@ -1170,10 +1170,30 @@ section p {
   padding: 10px 14px;
   border-radius: 999px;
   cursor:pointer;
+
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
 }
-.dash-btn.active{
-  border-color: rgba(127,92,255,0.55);
-  box-shadow: 0 0 16px rgba(127,92,255,0.18);
+.dash-btn.active {
+  background: linear-gradient(90deg, #7f5cff, #5b9dff);
+  color: #ffffff;
+  border: 1px solid rgba(127, 92, 255, 0.95);
+
+  box-shadow:
+    0 0 0 2px rgba(127, 92, 255, 0.35),
+    0 0 22px rgba(127, 92, 255, 0.75);
+
+  font-weight: 700;
+  transform: translateY(-1px);
+}
+@media (max-width: 768px) {
+  .dash-btn.active {
+    box-shadow:
+      0 0 0 2px rgba(127, 92, 255, 0.45),
+      0 0 26px rgba(127, 92, 255, 0.9);
+  }
 }
 .chart-modal{
   position: fixed;

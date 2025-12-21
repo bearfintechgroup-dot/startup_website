@@ -27,8 +27,10 @@ console.log("✅ dashboard.js loaded", window.location.pathname);
 
     let currentSort = null;
     let currentData = [];
-
     let sortDirection = "desc"; // default
+
+    let isLoading = false;
+
 
     // -----------------------------
     // RESTORE SAVED PREFERENCES
@@ -94,40 +96,60 @@ console.log("✅ dashboard.js loaded", window.location.pathname);
             return { sort: null, direction: "desc" };
     }
 
+    function setLoading(state) {
+        isLoading = state;
+
+        document.querySelectorAll(".dash-btn, .dash-sort button").forEach((btn) => {
+            btn.disabled = state;
+        });
+
+        // Optional: add a class for CSS styling if you want it more obvious
+        document.body.classList.toggle("dash-loading", state);
+        }
+
 
     // -----------------------------
     // DASHBOARD LOAD
     // -----------------------------
     async function loadDashboard() {
-      grid.innerHTML = "";
+        setLoading(true);
+        grid.innerHTML = "";
 
-      try {
-        const payload = await fetchJSON(
-          `/api/market?period=${encodeURIComponent(currentPeriod)}`
-        );
+        try {
+            const payload = await fetchJSON(
+                `/api/market?period=${encodeURIComponent(currentPeriod)}`
+            );
 
-        renderMarketRegime(payload.regime);
+            renderMarketRegime(payload.regime);
 
-        const entries = Object.entries(payload.assets || {});
+            const entries = Object.entries(payload.assets || {});
 
-        if (entries.length === 0) {
-          grid.innerHTML = `
-            <div class="dash-error">
-              <strong>Not enough data for this timeframe.</strong><br>
-              Try 3M or 6M.
-            </div>
-          `;
-          return;
+            if (entries.length === 0) {
+                grid.innerHTML = `
+                    <div class="dash-error">
+                        <strong>Not enough data for this timeframe.</strong><br>
+                        Try 3M or 6M.
+                    </div>
+                `;
+                return;
+            }
+
+            currentData = entries.map(([symbol, info]) => ({ symbol, info }));
+            renderCards();
+
+            } catch (err) {
+                console.error(err);
+                grid.innerHTML = `
+                    <div class="dash-error">
+                        Failed to load market data.
+                    </div>
+                `;
+            } finally {
+                // ALWAYS re-enable buttons
+                setLoading(false);
+            }
         }
 
-        currentData = entries.map(([symbol, info]) => ({ symbol, info }));
-        renderCards();
-
-      } catch (err) {
-        console.error(err);
-        grid.innerHTML = `<div class="dash-error">Failed to load data.</div>`;
-      }
-    }
 
     // -----------------------------
     // CARD RENDER + SORT
@@ -243,7 +265,9 @@ console.log("✅ dashboard.js loaded", window.location.pathname);
     modal.onclick = (e) => e.target === modal && modal.classList.remove("open");
 
     document.querySelectorAll(".dash-btn").forEach(btn => {
-        btn.onclick = () => {
+         btn.onclick = () => {
+            if (isLoading) return; // 🔒 HARD LOCK
+
             document.querySelectorAll(".dash-btn").forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
 
@@ -271,14 +295,14 @@ console.log("✅ dashboard.js loaded", window.location.pathname);
 
             loadDashboard();
         };
-
     });
 
     // Sort buttons (Return / Strength / Volatility)
     document.querySelectorAll(".dash-sort button").forEach(btn => {
-        btn.onclick = () => {
+         btn.onclick = () => {
+            if (isLoading) return; // 🔒 HARD LOCK
+
             if (currentSort === btn.dataset.sort) {
-                // Toggle direction
                 sortDirection = sortDirection === "desc" ? "asc" : "desc";
             } else {
                 currentSort = btn.dataset.sort;
@@ -291,7 +315,7 @@ console.log("✅ dashboard.js loaded", window.location.pathname);
 
             btn.classList.add("active", sortDirection);
 
-            // Save preference
+            // Persist
             localStorage.setItem("dashboard_prefs", JSON.stringify({
                 period: currentPeriod,
                 sort: currentSort,
@@ -300,7 +324,7 @@ console.log("✅ dashboard.js loaded", window.location.pathname);
 
             renderCards();
         };
-     });
+    });
 
     // -----------------------------
     // INIT
