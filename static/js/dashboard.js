@@ -28,6 +28,28 @@ console.log("✅ dashboard.js loaded", window.location.pathname);
     let currentSort = null;
     let currentData = [];
 
+    let sortDirection = "desc"; // default
+
+    // -----------------------------
+    // RESTORE SAVED PREFERENCES
+    // -----------------------------
+    const saved = JSON.parse(localStorage.getItem("dashboard_prefs") || "{}");
+
+    if (saved.period) currentPeriod = saved.period;
+    if (saved.sort) currentSort = saved.sort;
+    if (saved.direction) sortDirection = saved.direction;
+
+    // -----------------------------
+    // STEP 3 — APPLY DEFAULT SORT IF NONE SAVED
+    // -----------------------------
+    if (!saved.sort && saved.period) {
+        const preset = defaultSortForPeriod(saved.period);
+        currentSort = preset.sort;
+        sortDirection = preset.direction;
+    }
+
+
+
     // -----------------------------
     // API
     // -----------------------------
@@ -56,6 +78,22 @@ console.log("✅ dashboard.js loaded", window.location.pathname);
 
       el.textContent = `Market Regime: ${regime.label}`;
     }
+    function defaultSortForPeriod(period) {
+        if (period === "5d") {
+            return { sort: "strength", direction: "desc" };
+        }
+        if (period === "1mo") {
+            return { sort: "return", direction: "desc" };
+        }
+        if (period === "3mo") {
+            return { sort: "strength", direction: "desc" };
+        }
+        if (period === "6mo") {
+            return { sort: "volatility", direction: "desc" };
+        }
+            return { sort: null, direction: "desc" };
+    }
+
 
     // -----------------------------
     // DASHBOARD LOAD
@@ -98,17 +136,24 @@ console.log("✅ dashboard.js loaded", window.location.pathname);
       grid.innerHTML = "";
 
       let data = [...currentData];
+      const dir = sortDirection === "asc" ? 1 : -1;
 
       if (currentSort === "return") {
-        data.sort((a, b) => (b.info.total_return || 0) - (a.info.total_return || 0));
+        data.sort((a, b) =>
+            dir * ((a.info.total_return || 0) - (b.info.total_return || 0)))
+        ;
       }
 
       if (currentSort === "strength") {
-        data.sort((a, b) => computeStrength(b.info) - computeStrength(a.info));
+        data.sort((a, b) =>
+            dir * (computeStrength(a.info) - computeStrength(b.info)))
+        ;
       }
 
       if (currentSort === "volatility") {
-        data.sort((a, b) => (b.info.volatility || 0) - (a.info.volatility || 0));
+        data.sort((a, b) =>
+            dir * ((a.info.volatility || 0) - (b.info.volatility || 0)))
+        ;
       }
 
       data.forEach(({ symbol, info }) => {
@@ -198,24 +243,64 @@ console.log("✅ dashboard.js loaded", window.location.pathname);
     modal.onclick = (e) => e.target === modal && modal.classList.remove("open");
 
     document.querySelectorAll(".dash-btn").forEach(btn => {
-      btn.onclick = () => {
-        document.querySelectorAll(".dash-btn").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
+        btn.onclick = () => {
+            document.querySelectorAll(".dash-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
 
-        currentPeriod = btn.dataset.period;
-        loadDashboard();
-      };
+            currentPeriod = btn.dataset.period;
+
+            // Apply smart default sort for this timeframe
+            const preset = defaultSortForPeriod(currentPeriod);
+            currentSort = preset.sort;
+            sortDirection = preset.direction;
+
+            // Update sort UI
+            document.querySelectorAll(".dash-sort button").forEach(b => {
+                b.classList.remove("active", "asc", "desc");
+                if (b.dataset.sort === currentSort) {
+                    b.classList.add("active", sortDirection);
+                }
+            });
+
+            // Persist
+            localStorage.setItem("dashboard_prefs", JSON.stringify({
+                period: currentPeriod,
+                sort: currentSort,
+                direction: sortDirection
+            }));
+
+            loadDashboard();
+        };
+
     });
 
+    // Sort buttons (Return / Strength / Volatility)
     document.querySelectorAll(".dash-sort button").forEach(btn => {
-      btn.onclick = () => {
-        document.querySelectorAll(".dash-sort button").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
+        btn.onclick = () => {
+            if (currentSort === btn.dataset.sort) {
+                // Toggle direction
+                sortDirection = sortDirection === "desc" ? "asc" : "desc";
+            } else {
+                currentSort = btn.dataset.sort;
+                sortDirection = "desc";
+            }
 
-        currentSort = btn.dataset.sort;
-        renderCards();
-      };
-    });
+            document.querySelectorAll(".dash-sort button").forEach(b => {
+                b.classList.remove("active", "asc", "desc");
+            });
+
+            btn.classList.add("active", sortDirection);
+
+            // Save preference
+            localStorage.setItem("dashboard_prefs", JSON.stringify({
+                period: currentPeriod,
+                sort: currentSort,
+                direction: sortDirection
+            }));
+
+            renderCards();
+        };
+     });
 
     // -----------------------------
     // INIT

@@ -1326,6 +1326,21 @@ section p {
   cursor: pointer;
 }
 
+.dash-sort button::after {
+  content: "";
+  margin-left: 6px;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.dash-sort button.asc::after {
+  content: "↑";
+}
+
+.dash-sort button.desc::after {
+  content: "↓";
+}
+
 /* ============================================================
    PREMIUM GLASS FOOTER
 ============================================================ */
